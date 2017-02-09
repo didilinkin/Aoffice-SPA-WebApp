@@ -258,4 +258,15 @@ export const addFirstLoadingMap =( state,res ) => {
     // 初始页面需要添加一次状态
     let null_Obj = {}                                                                                                       // 创建一个空对象
     state.searchMapRequest_Arr.push(null_Obj)                                                                               // 将空对象推入 '记录地图检索请求' 的数组中
+    // 更改页面加载的次数
+    state.searchValue.openMapViewNum_Arr.push(null_Obj)
+}
+
+// 当页面重新渲染, 清空请求次数
+export const clearRequestLength =( state ) => {
+    // 清空地图页面 请求次数
+    state.searchMapRequest_Arr = []                                                                            // 将数组直接赋给state
+    // 初始页面需要添加一次状态
+    let null_Obj = {}                                                                                                       // 创建一个空对象
+    state.searchMapRequest_Arr.push(null_Obj)                                                                               // 将空对象推入 '记录地图检索请求' 的数组中
 }

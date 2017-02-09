@@ -284,8 +284,20 @@ export const setSearchMapValue_decorationValue = ({commit},Obj) => {
     // 保存要改变的值 到 统一数组对象 searchValue_Arr
     let searchValue_Arr = [
         {
-            attrName:   'decoration'                    // 要改变的属性名称
-            ,setValue:  Obj.decoration                  // 要改变的类型值
+            attrName:   'indexLevel'                    // 要改变的属性名称
+            ,setValue:  Obj.indexLevel                  // 要改变的类型值
+        }
+    ]
+    commit('addSearchMapValue', searchValue_Arr)        // 交给统一处理任务
+}
+
+// 改变地图层级( 参数: 当前层级 )
+export const setMapIndexLevel = ({commit},Obj) => {
+    // 保存要改变的值 到 统一数组对象 searchValue_Arr
+    let searchValue_Arr = [
+        {
+            attrName:   'indexLevel'                    // 要改变的属性名称
+            ,setValue:  Obj.indexLevel                  // 要改变的类型值
         }
     ]
     commit('addSearchMapValue', searchValue_Arr)        // 交给统一处理任务
@@ -304,5 +316,11 @@ export const firstLoadingMap = ({commit}, Obj) => {
     .catch(function (error) {
         console.log(error)
     });
-
 }
+
+// 清空请求次数的事件( 当页面再次整体渲染时, 将请求次数清空 )
+export const clearRequestLength = ({commit}) => {
+    commit('clearRequestLength')
+}
+
+

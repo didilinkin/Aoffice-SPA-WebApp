@@ -70,6 +70,7 @@ const state = {
         ,administrative_Arr:    []                                      // 行政区数组
         ,business_Arr:          []                                      // 商圈数组
         ,building_Arr:          []                                      // 办公楼数组
+        ,openMapViewNum_Arr:    []                                      // 当从别的页面切入Map页面时,向内推入一个空对象( 触发watch观察事件 )
     }
     ,searchMapRequest_Arr: []                                           // 当发生地图检索请求时,向内推入一个空对象( 触发watch观察事件 )
 }
