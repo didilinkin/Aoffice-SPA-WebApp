@@ -323,4 +323,16 @@ export const clearRequestLength = ({commit}) => {
     commit('clearRequestLength')
 }
 
+// 当层级改变时, 保存改变的次数值
+export const setIndexLevelNum = ({commit}) => {
+    commit('addIndexLevelNum')
+}
+
+// 记录当前层级检索次数( 比较是否是在当前层级进行检索 )
+export const saveIndexLevelNum = ({commit}, Obj) => {
+    let saveObj = {
+        saveNum: Obj.saveNum
+    }
+    commit('addSaveIndexLevelNum', saveObj)
+}
 

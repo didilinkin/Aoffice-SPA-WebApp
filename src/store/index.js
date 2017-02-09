@@ -71,6 +71,8 @@ const state = {
         ,business_Arr:          []                                      // 商圈数组
         ,building_Arr:          []                                      // 办公楼数组
         ,openMapViewNum_Arr:    []                                      // 当从别的页面切入Map页面时,向内推入一个空对象( 触发watch观察事件 )
+        ,setIndexLevelNum_Arr:  []                                      // 当层级改变的时候, 向内推一个空对象( 判断事件是否不改变层级 )
+        ,saveIndexLevelNum_Arr: []                                      // 记录当前层级检索次数( 比较是否是在当前层级进行检索 )
     }
     ,searchMapRequest_Arr: []                                           // 当发生地图检索请求时,向内推入一个空对象( 触发watch观察事件 )
 }

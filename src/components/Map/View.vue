@@ -10,7 +10,8 @@ export default {
         return {
             indexLevelConst       : ''  // 一个层级常量: 第一次将默认状态保存进来; 然后用于比较当前层级是否发生变化( 发生变化: 将最新的值存入 / 未发生变化: 无处理 )
             ,openMapViewNum_const : ''  // 一个页面请求次数值常量
-            ,testMsg: 'ttt'
+            ,indexLevelNum_const  : ''  // 一个层级改变次数值常量
+            ,tempIndexLevel       : ''  // 临时值
         }
     }
     ,mounted: function() {
@@ -20,14 +21,15 @@ export default {
     ,methods: {
         // 目的: 第一次将默认状态保存进来
         firstSaveIndexLevel: function() {
-            // 先保存数值, 然后再请求
-            this.$data.openMapViewNum_const = this.$store.state.searchValue.openMapViewNum_Arr.length    // 保存渲染页面次数
             // 目的: 初次渲染地图页面( 直接使用默认检索条件, 不需要参数 )
-            ,this.$store.dispatch({
+            this.$store.dispatch({
                 type: 'firstLoadingMap',
                 cityCode: this.$store.state.city.cityCode                                     // 查询当前城市 —— 行政区数据
             })
-
+            // 先保存数值, 然后再请求
+            this.$data.openMapViewNum_const = this.$store.state.searchValue.openMapViewNum_Arr.length    // 保存渲染页面次数
+            // 保存层级
+            this.$data.indexLevelConst      = this.$store.state.searchValue.indexLevel
         }
         // 目的: 加载百度地图事件( 后期不再二次加载 )
         ,loadingBaiduMap: function() {
@@ -58,84 +60,45 @@ export default {
                 if (zoomLevel >= 15){                                                           // 输出3级地图内容:详细覆盖
                     console.log("输出3级地图内容:详细覆盖")
                     // addBuilding(buildingPoint_Arr,17);
-                    // 保存地图层级
-                    saveIndexLevel('building')       // 改为具体
-
-                    //console.log(this.$data.indexLevel_const)
-                    //this.$data.indexLevel_const     = '' // 清空
-                    //this.$data.indexLevel_const     = this.$store.state.searchValue.indexLevel
-                    // 目的: 改变地图层级
-                    // ,this.$store.dispatch({
-                    //     type: 'setMapIndexLevel'
-                    //     ,indexLevel: 'building'  // 改为具体
-                    // })
+                    saveIndexLevel('building')                                                  // 保存地图层级: 改为具体
+                    setIndexLevelNum()                                                          // 当层级改变, 记录层级改变次数( 用于比较非层级改变的事件 )
                 }else if (zoomLevel >= 14){
-                    console.log("输出2级地图内容:商圈")                                         // 商圈自定义覆盖物
+                    console.log("输出2级地图内容:商圈")                                          // 商圈自定义覆盖物
                     addRangeOverlay(business_Arr,16)
-                    // 保存地图层级
-                    saveIndexLevel('business')       // 改为商圈
-
-                    //console.log(this.$data.indexLevel_const)
-                    //this.$data.indexLevel_const     = '' // 清空
-                    //this.$data.indexLevel_const     = this.$store.state.searchValue.indexLevel
-                    // 目的: 改变地图层级
-                    //,this.$store.dispatch({
-                    //    type: 'setMapIndexLevel'
-                    //    ,indexLevel: 'business'  // 改为商圈
-                    // })
+                    saveIndexLevel('business')                                                  // 保存地图层级: 改为商圈
+                    setIndexLevelNum()                                                          // 当层级改变, 记录层级改变次数( 用于比较非层级改变的事件 )
                 }else if (zoomLevel >= 12){
-                    // let AAA = this.$data.indexLevelConst
-                    // altMsg('2号行政区')
-                    console.log("输出1级地图内容:行政区( 覆盖物放大 )")                          // 商圈自定义覆盖物
+                    console.log("输出1级地图内容:行政区( 覆盖物放大 )")                            // 商圈自定义覆盖物
                     addRangeOverlay(administrative_Arr,14)
-                    // 保存地图层级
-                    saveIndexLevel('administrative')       // 改为行政区
-
-                    //this.$data.indexLevel_const     = '' // 清空
-                    //this.$data.indexLevel_const     = this.$store.state.searchValue.indexLevel
-                    // 目的: 改变地图层级
-                    //,this.$store.dispatch({
-                    //    type: 'setMapIndexLevel'
-                    //    ,indexLevel: 'administrative'  // 改为行政区
-                    //})
+                    saveIndexLevel('administrative')                                            // 保存地图层级: 改为行政区
+                    setIndexLevelNum()                                                          // 当层级改变, 记录层级改变次数( 用于比较非层级改变的事件 )
                 }else{
                     if (!lastLevel < 12) {
                         console.log("输出1级地图内容:行政区( 覆盖物缩小 )");
                         addRangeOverlay(administrative_Arr,14);                                 // 输出行政区自定义覆盖物
-                        setRangeOverlayStyle()                                               // 改变范围覆盖物尺寸( 只有初始级别要缩小 )
-                        // 保存地图层级
-                        saveIndexLevel('administrative')       // 改为行政区
-                        // altMsg('行政区')
-                        // this.$data.indexLevel_const     = {} // 清空
-                        // this.$data.indexLevel_const     = this.$store.state.searchValue.indexLevel
-                        // 目的: 改变地图层级
-                        // ,this.$store.dispatch({
-                        //    type: 'setMapIndexLevel'
-                        //    ,indexLevel: 'administrative'  // 改为行政区
-                        //})
+                        setRangeOverlayStyle()                                                  // 改变范围覆盖物尺寸( 只有初始级别要缩小 )
+                        saveIndexLevel('administrative')                                        // 保存地图层级: 改为行政区
                     }
                 }
             })
 
-            // 测试层级 判断调用函数
-            const altMsg = ( msg ) => {
-                // console.log('跳出打印' + msg)
-                this.$data.indexLevel_const     = {} // 清空
-                this.$data.indexLevel_const     = this.$store.state.searchValue.indexLevel
-                console.log(this.$data.indexLevel_const + msg)
-            }
-
             // 保存当前store的层级, 然后将发送修改地图层级的任务
             const saveIndexLevel = ( indexLevel ) => {
-                this.$data.indexLevel_const = {}                                        // 清空
-                this.$data.indexLevel_const = this.$store.state.searchValue.indexLevel  // 保存上一级层级
-                this.$store.dispatch({                                                  // 目的: 改变地图层级
+                // 先清空$data中的状态, 然后将当前地图层级存入$data, 然后方便后面判断层级更改
+                this.$data.indexLevelConst = {}                                                                 // 清空
+                this.$data.indexLevelConst = this.$store.state.searchValue.indexLevel                           // 保存上一级层级
+                this.$data.indexLevelNum_const = this.$store.state.searchValue.setIndexLevelNum_Arr.length      // 保存上一级层级
+                this.$store.dispatch({                                                                          // 目的: 改变地图层级
                     type: 'setMapIndexLevel'
                     ,indexLevel: indexLevel
                 })
             }
-
-
+            // 当层级改变时, 保存改变的次数值
+            const setIndexLevelNum = () => {
+                this.$store.dispatch({                                                          // 目的: 改变地图层级
+                    type: 'setIndexLevelNum'
+                })
+            }
             // 地图覆盖物判断添加事件 —— 声明常量 ( 行政区 + 商圈 + 具体覆盖物 )
             const buildingOverlayArr = []                                                         // 声明常量
             const addRangeOverlay = ( ObjGroup,setZoom ) => {                                     // 1级 + 2级 通用添加覆盖物事件
@@ -206,6 +169,62 @@ export default {
             setRangeOverlayStyle()                                                           // 改变范围覆盖物尺寸( 只有初始级别要缩小 )
 
         }
+        // 目的: 更新 地图层级状态
+        ,updateIndexLevel: function() {
+
+        }
+        // 目的: 用于判断, 执行相应的加载
+        ,judgeState: function() {
+            // 保存state值
+            let indexLevel              = this.$store.state.searchValue.indexLevel                          // 层级
+                ,btypeState             = this.$store.state.searchValue.btype                               // 类型
+                ,requestLength          = this.$store.state.searchMapRequest_Arr.length                     // 判断是否是第一次加载
+                ,openMapViewNumLength   = this.$store.state.searchValue.openMapViewNum_Arr.length           // 页面加载次数
+                ,indexLevelNumLength    = this.$store.state.searchValue.setIndexLevelNum_Arr.length         // 层级改变次数值
+                ,saveIndexLevelNum    = this.$store.state.searchValue.saveIndexLevelNum_Arr                 // 记录当前层级检索次数( 比较是否是在当前层级进行检索 )
+            // 保存data值
+            let indexLevelConst         = this.$data.indexLevelConst                                        // data: 层级
+                ,openMapViewNum_const   = this.$data.openMapViewNum_const                                   // data: 打开页面的次数
+                ,indexLevelNum_const    = this.$data.indexLevelNum_const                                    // data: 层级改变次数值
+
+
+            // 1. 判断是否初次加载此页面
+            // 1.1   判断请求次数是否为1( 1: 初次进入, 直接渲染; 不为1: 在首次进入地图页面后, 开始触发检索条件, 开始判断层级 )
+
+            if( openMapViewNumLength == 1 ) {
+                if( requestLength == 1 ) {
+                    console.log('初次地图页 - 无操作')
+                    this.loadingBaiduMap()
+                } else {
+                    // 开始判断层级是否改变
+                    if ( indexLevelConst == indexLevel ) {
+                        // 不改变请求接口
+                        console.log('初次地图页 - 有操作 - 层级未发生改变')
+                    } else {
+                        // 目的: 记录当前层级检索次数( 比较是否是在当前层级进行检索 )
+                        this.$store.dispatch({
+                            type: 'saveIndexLevelNum',
+                            saveNum: indexLevelNum_const
+                        })
+                        // 初次地图页 - 有操作 - 层级发生改变 - 又触发的事件( 指数大于2 )
+                        if( saveIndexLevelNum.length != 1 ) {
+                            let saveIndexLevelNum_lengthNum = saveIndexLevelNum.length
+                                ,minNum = this.$store.state.searchValue.saveIndexLevelNum_Arr[saveIndexLevelNum_lengthNum-2].saveNum            // 2 -> 0
+                                ,maxNum = this.$store.state.searchValue.saveIndexLevelNum_Arr[saveIndexLevelNum_lengthNum-1].saveNum            // 1 -> 1
+                            if( minNum == maxNum ) {
+                                console.log('初次地图页 - 有操作 - 层级未发生改变 - 层级未改变, 在同级接口进行检索')
+                            } else {
+                                console.log('初次地图页 - 有操作 - 层级未发生改变 - 层级发生改变, 更换级别检索')
+                            }
+                        }
+                    }
+                }
+            } else {
+                // 非初次进入此页面( 还是检索状态内的数据 ) 进行操作
+                console.log('非初次进入地图页')
+                this.loadingBaiduMap()
+            }
+        }
     }
     ,computed: mapGetters({
         getSearchRequest: 'getSearchRequest'
@@ -213,102 +232,8 @@ export default {
     ,watch: {
         // 当 '请求记录' 数组发生改变时, 执行刷新页面
         getSearchRequest: function () {
-            // 还要保留层级级别状态 用于请求( 已层级等级为先, 然后判断类型 )
-            let indexLevel = this.$store.state.searchValue.indexLevel                      // 层级
-                ,btypeState = this.$store.state.searchValue.btype                          // 类型
-                ,requestLength = this.$store.state.searchMapRequest_Arr.length             // 判断是否是第一次加载
-                ,openMapViewNumLength = this.$store.state.searchValue.openMapViewNum_Arr.length      // 页面加载次数
-
-            // 首先判断 页面加载的次数; 是否等于第一次( 使用默认条件进行检索 )
-            if( openMapViewNumLength == 1 ){
-                // 第五次判断: 当前是第一次加载页面, 只是触发了请求. 现在要开始请求次数
-                if( requestLength == 1  ){
-                    console.log('这是第一次进入页面')
-                    this.loadingBaiduMap()
-                } else {
-                    console.log('开始判断层级')
-                    // 第六次判断: 现在开始判断层级是否改变
-                    if( indexLevel != this.$data.indexLevel_const ) {
-                        console.log('初始页改变层级,更改请求接口:' + '上一级别' + this.$data.indexLevel_const + '当前级别' + indexLevel )
-                    } else {
-                        console.log(' 初始页层级未发生改变, 在当前级别接口进行请求 ')
-                    }
-                }
-            // 第二次判断 如果state次数 > data记录页面打开次数: 说明是从别的页面切回来的( 使用state数值进行检索 )
-            } else if ( openMapViewNumLength != this.$data.openMapViewNum_const ){
-                // console.log('新加入页面')
-                console.log('state记录新开页面次数' + openMapViewNumLength)
-                console.log('data记录次数' + this.$data.openMapViewNum_const)
-                this.loadingBaiduMap()
-                // 要防止此处溢出
-                /*
-                    // 将请求次数清空, 然后再判断次数是否为第一次加载
-                    let clearNum = () => {
-                        console.log('执行清空')
-                        this.$store.dispatch({                                                  // 目的: 将请求次数清空
-                            type: 'clearRequestLength'
-                        })
-                    }
-                    clearNum()
-
-                    // 再次保存 请求次数变量
-                    let requestLength = this.$store.state.searchMapRequest_Arr.length             // 判断是否是第一次加载
-                    if ( requestLength == 1 ){
-                        // 重新渲染地图
-                        this.loadingBaiduMap()
-                    } else {
-                        console.log('开始判断层级')
-                        // 第七次判断: 现在开始判断层级是否改变
-                        if( indexLevel != this.$data.indexLevel_const ) {
-                            console.log('初始页改变层级,更改请求接口:' + '上一级别' + this.$data.indexLevel_const + '当前级别' + indexLevel )
-                        } else {
-                            console.log(' 初始页层级未发生改变, 在当前级别接口进行请求 ')
-                        }
-                    }
-                */
-            // 第三次判断: 此时页面没有重写切入( 页面加载次数没有改变 ), 只是检索状态改变( 现在开始判断层级是否改变 )
-            // 通过层级监听来创建一个计算事件: 当层级发生改变的时候, 先保存state内当前层级的状态值, 然后出发actions改变state值. 最后通过比较两个值来判断
-            // 结论: 如果两个值不相等, 说明层级发生改变, 触发不同级别的请求; 否则 触发相同级别的请求
-            } else {
-                // 第四次判断: 如果层级发生改变 改变 检索级别接口
-                if( indexLevel != this.$data.indexLevel_const ) {
-                    consolo.log('改变了层级,要更改请求接口:' + '上一级别' + this.$data.indexLevel_const + '当前级别' + indexLevel )
-                } else {
-                    console.log(' 层级未发生改变, 在当前级别接口进行请求 ')
-                }
-            }
-
-
-            /*
-            if( requestLength == 1 ) {                                                               // 在这里进行层级比较
-                console.log('初次加载')
-                // 在此处判断一下 如果层级改变 渲染页面; 如果层级未发生改变 不渲染页面;
-                this.loadingBaiduMap()
-            } else if( openMapViewNumLength != this.$data.openMapViewNum_const ) {
-                console.log('新加入页面')
-                this.loadingBaiduMap()
-            } else if( indexLevel != this.$data.indexLevel_const ) {
-                console.log('发生层级改变, 重新渲染地图')
-                this.loadingBaiduMap()
-            } else {
-                console.log('层级未发生改变, 地图不进行渲染')
-            }
-            */
-
-
-            /*
-
-            indexLevel != this.$data.indexLevel_const
-
-            requestLength != this.$data.requestNum_const
-
-            else if( indexLevel != this.$data.indexLevel_const ) {
-                console.log('发生层级改变, 重新渲染地图')
-                this.loadingBaiduMap()
-            } else {
-                console.log('层级未发生改变, 地图不进行渲染')
-            }
-            */
+            this.updateIndexLevel()             // 更新层级状态
+            this.judgeState()                   // 判断状态
         }
     }
 }

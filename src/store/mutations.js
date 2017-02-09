@@ -270,3 +270,17 @@ export const clearRequestLength =( state ) => {
     let null_Obj = {}                                                                                                       // 创建一个空对象
     state.searchMapRequest_Arr.push(null_Obj)                                                                               // 将空对象推入 '记录地图检索请求' 的数组中
 }
+
+// 当层级改变时, 保存改变的次数值
+export const addIndexLevelNum =( state ) => {
+    // 初始页面需要添加一次状态
+    let null_Obj = {}                                                                                                       // 创建一个空对象
+    state.searchValue.setIndexLevelNum_Arr.push(null_Obj)                                                                               // 将空对象推入 '记录地图检索请求' 的数组中
+}
+
+
+// 记录当前层级检索次数( 比较是否是在当前层级进行检索 )
+export const addSaveIndexLevelNum =( state, res ) => {
+    // 初始页面需要添加一次状态                                                                                                     // 创建一个空对象
+    state.searchValue.saveIndexLevelNum_Arr.push(res)                                                                             // 将空对象推入 '记录地图检索请求' 的数组中
+}
