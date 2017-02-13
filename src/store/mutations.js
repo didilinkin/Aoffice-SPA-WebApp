@@ -295,11 +295,7 @@ export const addMapAdministrative =( state,res ) => {
 // 保存 - 得到的行政区数据( 通过类型判断 )
 export const addHouseListBType =( state,res ) => {
     // console.log('保存数据')
-    console.log(res)
-
     state.hotBuildingArr = []       //设空
-
-
     // 拼接顶部轮播图 图片地址
     for (var i = 0; i < res.building.length; i++) {
         function BuildingImg(imgUrl) {
@@ -307,9 +303,6 @@ export const addHouseListBType =( state,res ) => {
         }
         const building_Obj = new BuildingImg( res.building[i].appListUrl )
         res.building[i].appListUrl = building_Obj        // 将构造函数的对象推入 store的数组中
-
-
-
     }
     state.hotBuildingArr = res.building
 

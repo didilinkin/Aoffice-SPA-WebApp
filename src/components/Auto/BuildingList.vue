@@ -36,12 +36,8 @@ export default {
     ,methods: {
         // 将 $store 的数组 放置到 $data
         setArr: function() {
-            console.log('kaishi')
-            console.log( this.$store.state.hotBuildingList_Arr )
-            console.log( this.$data.buildingArr )
+
             this.$data.buildingArr = this.$store.state.hotBuildingList_Arr
-            console.log('end')
-            console.log(this.$data.buildingArr)
         }
         ,toBuildingDetails: function ( toPageCode, toPageType ) {
             // 判断大厦类型( 大楼 / 联合办公 )
@@ -54,14 +50,6 @@ export default {
         }
     }
     ,components: components
-    ,watch: {
-        // 当 '请求记录' 数组发生改变时, 执行刷新页面
-        getBuildingNum: function () {
-            console.log( '数组发生了变化' )
-            // console.log( hotBuildingList_Arr[0] )
-            console.log('end')
-        }
-    }
 }
 </script>
 <style lang="sass" scoped>

@@ -367,7 +367,6 @@ export const setHouseListBType = ({commit},Obj) => {
     }))
     .then(function (response) {
         let set_HouseListBType = response.data.resultData
-        // console.log( set_mapAdministrative )
         commit('addHouseListBType', set_HouseListBType)
     })
     .catch(function (error) {

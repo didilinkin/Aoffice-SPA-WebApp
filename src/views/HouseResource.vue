@@ -46,5 +46,6 @@ export default {
 @import '../sass/main'
 
 #houseResource
+    min-height: 60vh
     +REM(margin-bottom,80px)
 </style>
