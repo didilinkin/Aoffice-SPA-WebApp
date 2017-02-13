@@ -3,7 +3,8 @@
     <div id="discover">
         <DiscoverAppBar />
         <Swiper :swiper_arr=bannerImg_Arr  />
-        <EnterpriseService />
+        <!-- <EnterpriseService /> -->
+        <ServiceIcon />
         <Title :title_info=title_info />
         <BuildingList />
     </div>
@@ -13,11 +14,12 @@
 import { mapGetters } from 'vuex'
 
 import  Swiper                  from    '../components/Discover/Swiper.vue'
-import  EnterpriseService       from    '../components/Discover/EnterpriseService.vue'
+// import  EnterpriseService       from    '../components/Discover/EnterpriseService.vue' // 替换这个图标按钮
+import  ServiceIcon             from    '../components/Discover/ServiceIcon.vue'
 import  Title                   from    '../components/Auto/Title.vue'
 import  BuildingList            from    '../components/Auto/BuildingList.vue'
 import  DiscoverAppBar          from    '../components/Discover/DiscoverAppBar.vue'
-const   components = { Swiper,EnterpriseService,Title,BuildingList,DiscoverAppBar }
+const   components = { Swiper, ServiceIcon, Title, BuildingList, DiscoverAppBar }
 
 export default {
     data() {
