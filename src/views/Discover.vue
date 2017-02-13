@@ -1,7 +1,7 @@
 <!-- "发现"页面 -->
 <template>
     <div id="discover">
-        <DiscoverAppBar class="test"/>
+        <DiscoverAppBar />
         <Swiper :swiper_arr=bannerImg_Arr  />
         <EnterpriseService />
         <Title :title_info=title_info />
@@ -31,7 +31,7 @@ export default {
     ,mounted: function() {
         this.getIndexData()             // 获取首页数据
         this.setBottomBtnState(0)
-        this.watchScrollY()             // 监听向上滑动
+        this.watchScrollY()             // 监听向上滑动, 改变样式
     }
     ,methods: {
         // 目的: 获取首页数据
@@ -47,11 +47,25 @@ export default {
         // 目的: 监听向上滑动
         ,watchScrollY() {
             window.onscroll = () => {
-                let yValue = window.scrollY
+                let yValue              = window.scrollY
+                    ,discoverAppBarObj  = document.getElementById('discoverAppBar')                     // 获得顶部appBar元素
+                    ,btnArr             = document.getElementsByClassName('material-icons')             // 检索按钮数组( 需要的只是前三个 ) 改变其样式( 强调 )
+                    ,inputObj           = document.getElementsByClassName('discoverAppBar__search')[0]  // 顶部appBar部分 - 输入框样式改变( 当屏幕下滑时 )
+
                 if( yValue <= 0 ) {
-                    console.log(' 现在归零 ')
+                    discoverAppBarObj.setAttribute('style', 'background-color: rgba(255, 255, 255, 0.1)')
+                    // 修改顶部appBar 按钮样式
+                    for(let i = 0; i < 3; i++) {
+                        btnArr[i].setAttribute('style', 'color: #FFF !important')
+                    }
+                    inputObj.setAttribute('style', 'background-color: none !important')
                 } else {
-                    console.log(' 开始移动 ')
+                    discoverAppBarObj.setAttribute('style', 'background-color: rgba(255, 255, 255, 0.95) !important; box-shadow: 0px 0px 5px 5px #FFF')
+                    // 修改顶部appBar 按钮样式
+                    for(let i = 0; i < 3; i++) {
+                        btnArr[i].setAttribute('style', 'color: rgb(255,94,27) !important')
+                    }
+                    inputObj.setAttribute('style', 'background-color: rgba(156,157,159, .3) !important')
                 }
             }
         }
