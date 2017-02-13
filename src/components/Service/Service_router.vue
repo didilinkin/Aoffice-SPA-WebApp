@@ -66,7 +66,7 @@ export default {
 
 </script>
 
-<style lang="sass">
+<style lang="sass" scoped>
 @import '../../sass/main'
 
 #service_router
