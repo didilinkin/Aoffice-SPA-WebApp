@@ -53,15 +53,6 @@ export default {
         this.firstLoading()         // 删除'日价格'元素
     }
     ,methods: {
-        // 目的: 初次渲染地图页面( 直接使用默认检索条件, 不需要参数 )
-        /*  此功能挪到 view组件执行
-            firstLoadingMap() {
-                this.$store.dispatch({
-                    type: 'firstLoadingMap',
-                    cityCode: this.$store.state.city.cityCode                                   // 查询当前城市 —— 行政区数据
-                })
-            }
-        */
         // 根据btype类型, 修改下拉菜单价格类型
         setPriceStyle(day,month){
             let dayPricePrice_Obj   = document.getElementById('dayPrice')
@@ -172,14 +163,55 @@ export default {
         // 如果 question 发生改变，这个函数就会运行
         getSearchRequest: function () {
             // 还要保留层级级别状态 用于请求( 已层级等级为先, 然后判断类型 )
-            let indexLevel = this.$store.state.searchValue.indexLevel
-                ,btypeState = this.$store.state.searchValue.btype
+            let indexLevel              = this.$store.state.searchValue.indexLevel
+                ,btypeState             = this.$store.state.searchValue.btype
+                ,priceMonthMinState     = this.$store.state.searchValue.priceMonthMin
+                ,priceMonthMaxState     = this.$store.state.searchValue.priceMonthMax
+                ,priceDayMinState       = this.$store.state.searchValue.priceDayMin
+                ,priceDayMaxState       = this.$store.state.searchValue.priceDayMax
+                ,decorationState        = this.$store.state.searchValue.decoration
+
+
             if ( btypeState == 'A' ) {
                 console.log(' 检索写字楼全部条件 ')
-                // console.log(indexLevel)     // 测试当前层级
+                // console.log('写字楼当前层级' + indexLevel)     // 测试当前层级( 成功 )
+                if( indexLevel == 'administrative' ) {
+                    // 发起: 行政区检索
+                    this.$store.dispatch({
+                        type            : 'getMapAdministrative'
+                        ,cityCode       : this.$store.state.city.cityCode
+                        ,bType          : btypeState
+                        ,priceMonthMin  : priceMonthMinState
+                        ,priceMonthMax  : priceMonthMaxState
+                        ,priceDayMin    : priceDayMinState
+                        ,priceDayMax    : priceDayMaxState
+                        ,decoration     : decorationState
+                    })
+                } else if( indexLevel == 'business' ) {
+                    // 发起: 商圈检索
+                } else {
+                    // 发起: 具体检索
+                }
             }else{
                 console.log(' 检索联合办公全部条件 ')
                 // console.log(indexLevel)     // 测试当前层级
+                if( indexLevel == 'administrative' ) {
+                    // 发起: 行政区检索
+                    this.$store.dispatch({
+                        type            : 'getMapAdministrative'
+                        ,cityCode       : this.$store.state.city.cityCode
+                        ,bType          : btypeState
+                        ,priceMonthMin  : priceMonthMinState
+                        ,priceMonthMax  : priceMonthMaxState
+                        ,priceDayMin    : priceDayMinState
+                        ,priceDayMax    : priceDayMaxState
+                        ,decoration     : decorationState
+                    })
+                } else if( indexLevel == 'business' ) {
+                    // 发起: 商圈检索
+                } else {
+                    // 发起: 具体检索
+                }
             }
         }
     }

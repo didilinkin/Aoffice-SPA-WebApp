@@ -12,3 +12,7 @@ export const getBCPointList             =   state   => state.BCPointList        
 export const getBuildingPointList       =   state   => state.buildingPointList          // 获取写字楼数据
 export const getSearchValue             =   state   => state.searchValue                // 获取写字楼数据
 export const getSearchRequest           =   state   => state.searchMapRequest_Arr       // 获取 '记录地图检索请求' 的数组 , 用于触发watch
+// 测试
+export const getAdministrative_Arr      =   state   => state.searchValue.administrative_Arr // 交互返回的行政区数组
+export const getBuildingNum             =   state   => state.buildingNum                // 改变数组时, 修改计数值
+export const getHotBuildingArr          =   state   => state.hotBuildingArr             // 改变数组时, 修改计数值

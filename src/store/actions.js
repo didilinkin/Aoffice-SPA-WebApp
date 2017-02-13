@@ -336,3 +336,46 @@ export const saveIndexLevelNum = ({commit}, Obj) => {
     commit('addSaveIndexLevelNum', saveObj)
 }
 
+// 地图行政区 - 统一交互接口( 两种类型 )
+export const getMapAdministrative = ({commit},Obj) => {
+    axios.post('http://app.aplusoffice.cn/api/map/getRegionPointList', qs.stringify({
+        'cityCode': Obj.cityCode
+        ,'bType': Obj.bType
+        ,'priceMonthMin': Obj.priceMonthMin
+        ,'priceMonthMax': Obj.priceMonthMax
+        ,'priceDayMin': Obj.priceDayMin
+        ,'priceDayMax': Obj.priceDayMin
+        ,'decoration': Obj.decoration
+    }))
+    .then(function (response) {
+        let set_mapAdministrative = response.data.resultData
+        // console.log( set_mapAdministrative )
+        commit('addMapAdministrative', set_mapAdministrative)
+    })
+    .catch(function (error) {
+        console.log(error)
+    });
+}
+
+
+// 获取 '房源' 类型数据 ( 写字楼 / 联合办公 )
+export const setHouseListBType = ({commit},Obj) => {
+    axios.post('http://app.aplusoffice.cn/api/building/houses', qs.stringify({
+        'cityCode': Obj.cityCode
+        ,'page' : Obj.page
+        ,'bType': Obj.bType
+    }))
+    .then(function (response) {
+        let set_HouseListBType = response.data.resultData
+        // console.log( set_mapAdministrative )
+        commit('addHouseListBType', set_HouseListBType)
+    })
+    .catch(function (error) {
+        console.log(error)
+    });
+}
+
+// 改变数组时, 修改计数值
+export const setBuildingNum = ({commit}) => {
+    commit('addBuildingNum')
+}

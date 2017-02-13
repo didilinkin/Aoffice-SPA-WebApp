@@ -1,7 +1,7 @@
 <!-- 通用 - 建筑物列表组件 -->
 <template>
     <div class="buildingList">
-        <div class="building--box" v-for="item in hotBuildingList_Arr[0]">
+        <div class="building--box" v-for="item in getHotBuildingArr">
             <!-- 建筑 - 简介 -->
             <div class="building--intro" v-bind:style="{ backgroundImage: 'url(' + item.appListUrl.imgUrl + ')' }" @click = 'toBuildingDetails( item.code, item.type )'>
                 <div class="badge"> {{ item.badge }} </div>
@@ -19,9 +19,31 @@ import  { mapGetters }          from 'vuex'
 const   components = { BuildingList_details }
 
 export default {
-    computed: mapGetters({ hotBuildingList_Arr: 'hotBuildingList_Arr' })
+    data() {
+        return {
+            buildingArr : []
+        }
+    }
+    ,mounted: function() {
+        // 未来要将切换进来时的 状态清空
+        this.setArr()
+    }
+    ,computed: mapGetters({
+        // hotBuildingList_Arr : 'hotBuildingList_Arr'
+        // ,getBuildingNum     : 'getBuildingNum'
+        getHotBuildingArr  : 'getHotBuildingArr'
+    })
     ,methods: {
-        toBuildingDetails: function ( toPageCode, toPageType ) {
+        // 将 $store 的数组 放置到 $data
+        setArr: function() {
+            console.log('kaishi')
+            console.log( this.$store.state.hotBuildingList_Arr )
+            console.log( this.$data.buildingArr )
+            this.$data.buildingArr = this.$store.state.hotBuildingList_Arr
+            console.log('end')
+            console.log(this.$data.buildingArr)
+        }
+        ,toBuildingDetails: function ( toPageCode, toPageType ) {
             // 判断大厦类型( 大楼 / 联合办公 )
             let building_type = toPageType
             if ( building_type === 'A' ) {
@@ -32,6 +54,14 @@ export default {
         }
     }
     ,components: components
+    ,watch: {
+        // 当 '请求记录' 数组发生改变时, 执行刷新页面
+        getBuildingNum: function () {
+            console.log( '数组发生了变化' )
+            // console.log( hotBuildingList_Arr[0] )
+            console.log('end')
+        }
+    }
 }
 </script>
 <style lang="sass" scoped>

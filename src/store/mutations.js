@@ -33,7 +33,7 @@ export const addState = (state,res) => {
     }
     setTimeout(function() {
         state.loadingState['judgeShow'] = false            // 当有数据时,设置加载动画状态为false
-    },4500)
+    },2300)
 }
 
 // 保存设备必要信息
@@ -278,9 +278,58 @@ export const addIndexLevelNum =( state ) => {
     state.searchValue.setIndexLevelNum_Arr.push(null_Obj)                                                                               // 将空对象推入 '记录地图检索请求' 的数组中
 }
 
-
 // 记录当前层级检索次数( 比较是否是在当前层级进行检索 )
 export const addSaveIndexLevelNum =( state, res ) => {
     // 初始页面需要添加一次状态                                                                                                     // 创建一个空对象
     state.searchValue.saveIndexLevelNum_Arr.push(res)                                                                             // 将空对象推入 '记录地图检索请求' 的数组中
+}
+
+// 保存 - 得到的行政区数据( 通过类型判断 )
+export const addMapAdministrative =( state,res ) => {
+    // console.log('保存数据')
+    console.log(res)
+    state.searchValue.administrative_Arr = res
+}
+
+
+// 保存 - 得到的行政区数据( 通过类型判断 )
+export const addHouseListBType =( state,res ) => {
+    // console.log('保存数据')
+    console.log(res)
+
+    state.hotBuildingArr = []       //设空
+
+
+    // 拼接顶部轮播图 图片地址
+    for (var i = 0; i < res.building.length; i++) {
+        function BuildingImg(imgUrl) {
+            this.imgUrl = "http://images.aplusoffice.cn/" + imgUrl
+        }
+        const building_Obj = new BuildingImg( res.building[i].appListUrl )
+        res.building[i].appListUrl = building_Obj        // 将构造函数的对象推入 store的数组中
+
+
+
+    }
+    state.hotBuildingArr = res.building
+
+    // 判断楼盘类型
+    for (var i = 0; i < res.building.length; i++) {
+        if(res.building[i].type=='A'){
+            state.hotBuildingArr[i]['badge']        = '写字楼'
+            state.hotBuildingArr[i]['judgeShow']    = true
+        }else{
+            state.hotBuildingArr[i]['badge']        = '联合办公'
+            state.hotBuildingArr[i]['judgeShow']    = false
+        }
+    }
+}
+
+
+
+// 改变数组时, 修改计数值
+export const addBuildingNum =( state ) => {
+    // 初始页面需要添加一次状态
+    let null_Obj = {}                                                                                                       // 创建一个空对象
+    state.buildingNum.push(null_Obj)                                                                               // 将空对象推入 '记录地图检索请求' 的数组中
 }

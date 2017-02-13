@@ -18,6 +18,8 @@ const state = {
     }                                                   // 加载动画状态
     ,bannerImg_Arr: []                                  // "发现" - banner图片数组
     ,hotBuildingList_Arr: []                            // "发现" - "热门房源"内容
+    ,hotBuildingArr: []                                 // 去掉[0]
+    ,buildingNum: []                                    // 用于记录类型改变次数
     ,furnitureInfo: {
         appPic: '',
         code: '',

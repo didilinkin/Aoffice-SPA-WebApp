@@ -12,6 +12,9 @@ export default {
             ,openMapViewNum_const : ''  // 一个页面请求次数值常量
             ,indexLevelNum_const  : ''  // 一个层级改变次数值常量
             ,tempIndexLevel       : ''  // 临时值
+            ,administrative_const : []  // 行政区覆盖物数组
+            ,business_const       : []  // 商圈覆盖物数组
+            ,building_const       : []  // 办公楼覆盖物数组
         }
     }
     ,mounted: function() {
@@ -75,13 +78,12 @@ export default {
                 }else{
                     if (!lastLevel < 12) {
                         console.log("输出1级地图内容:行政区( 覆盖物缩小 )");
-                        addRangeOverlay(administrative_Arr,14);                                 // 输出行政区自定义覆盖物
+                        addRangeOverlay(administrative_Arr,12);                                 // 输出行政区自定义覆盖物
                         setRangeOverlayStyle()                                                  // 改变范围覆盖物尺寸( 只有初始级别要缩小 )
                         saveIndexLevel('administrative')                                        // 保存地图层级: 改为行政区
                     }
                 }
             })
-
             // 保存当前store的层级, 然后将发送修改地图层级的任务
             const saveIndexLevel = ( indexLevel ) => {
                 // 先清空$data中的状态, 然后将当前地图层级存入$data, 然后方便后面判断层级更改
@@ -167,7 +169,6 @@ export default {
             // 以下为初次加载时, 更改样式
             addRangeOverlay(administrative_Arr,14)                                           // 先执行一次覆盖物添加( 运行小覆盖物 , 层级默认为11级 )
             setRangeOverlayStyle()                                                           // 改变范围覆盖物尺寸( 只有初始级别要缩小 )
-
         }
         // 目的: 更新 地图层级状态
         ,updateIndexLevel: function() {
@@ -221,19 +222,63 @@ export default {
                 }
             } else {
                 // 非初次进入此页面( 还是检索状态内的数据 ) 进行操作
-                console.log('非初次进入地图页')
-                this.loadingBaiduMap()
+                // console.log('非初次进入地图页')
+                // this.loadingBaiduMap()
+
+                // 开始判断层级是否改变
+                if ( indexLevelConst == indexLevel ) {
+                    // 不改变请求接口
+                    console.log('初次地图页 - 有操作 - 层级未发生改变')
+                } else {
+                    // 目的: 记录当前层级检索次数( 比较是否是在当前层级进行检索 )
+                    this.$store.dispatch({
+                        type: 'saveIndexLevelNum',
+                        saveNum: indexLevelNum_const
+                    })
+                    // 初次地图页 - 有操作 - 层级发生改变 - 又触发的事件( 指数大于2 )
+                    if( saveIndexLevelNum.length != 1 ) {
+                        let saveIndexLevelNum_lengthNum = saveIndexLevelNum.length
+                            ,minNum = this.$store.state.searchValue.saveIndexLevelNum_Arr[saveIndexLevelNum_lengthNum-2].saveNum            // 2 -> 0
+                            ,maxNum = this.$store.state.searchValue.saveIndexLevelNum_Arr[saveIndexLevelNum_lengthNum-1].saveNum            // 1 -> 1
+                        if( minNum == maxNum ) {
+                            console.log('初次地图页 - 有操作 - 层级未发生改变 - 层级未改变, 在同级接口进行检索')
+                        } else {
+                            console.log('初次地图页 - 有操作 - 层级未发生改变 - 层级发生改变, 更换级别检索')
+                        }
+                    }
+                }
+
+
+
+
+
             }
+        }
+        // 目的: 当数组发生改变, 执行这个事件: 将最新获取的数组推入 $data 当中
+        ,watchArrPushData: function() {
+            // 成功监听
+            // console.log(' 请求回来的数组: 开始 ')
+            // console.log( this.$store.state.searchValue.administrative_Arr )
+            // console.log( ' 请求结束 ' )
+            this.loadingBaiduMap()
+
+
         }
     }
     ,computed: mapGetters({
         getSearchRequest: 'getSearchRequest'
+        ,getAdministrative_Arr : 'getAdministrative_Arr'
     })
     ,watch: {
         // 当 '请求记录' 数组发生改变时, 执行刷新页面
         getSearchRequest: function () {
             this.updateIndexLevel()             // 更新层级状态
             this.judgeState()                   // 判断状态
+        }
+        // 测试等待行政区数组改变
+        ,getAdministrative_Arr: function() {
+            // 将最新的行政区数组 放入$data 中 —— 事件
+            this.watchArrPushData()
         }
     }
 }
