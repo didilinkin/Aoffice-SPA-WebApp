@@ -291,7 +291,6 @@ export const addMapAdministrative =( state,res ) => {
     state.searchValue.administrative_Arr = res
 }
 
-
 // 保存 - 得到的行政区数据( 通过类型判断 )
 export const addHouseListBType =( state,res ) => {
     // console.log('保存数据')
@@ -318,11 +317,16 @@ export const addHouseListBType =( state,res ) => {
     }
 }
 
-
-
 // 改变数组时, 修改计数值
-export const addBuildingNum =( state ) => {
+export const addBuildingNum = ( state ) => {
     // 初始页面需要添加一次状态
     let null_Obj = {}                                                                                                       // 创建一个空对象
     state.buildingNum.push(null_Obj)                                                                               // 将空对象推入 '记录地图检索请求' 的数组中
+}
+
+// 改变全局 '锁'状态管理中 - '房源'页 - 右侧抽屉 - 状态
+export const addHouseResourceDrawer = ( state, res ) => {
+    // 改变 $store '房源' 页 - 右侧抽屉状态
+    state.globalToggle.houseResourceRightDrawer.open    = res.openState
+    state.globalToggle.houseResourceRightDrawer.docked  = res.dockedState
 }

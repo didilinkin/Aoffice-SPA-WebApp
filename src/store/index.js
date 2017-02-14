@@ -16,6 +16,12 @@ const state = {
     ,loadingState: {
         judgeShow: true
     }                                                   // 加载动画状态
+    ,globalToggle: {                                    // 全局 '锁'的状态管理
+        houseResourceRightDrawer: {                     // '房源'页 - 右侧 - 抽屉锁
+            open    : false
+            ,docked : true
+        }
+    }
     ,bannerImg_Arr: []                                  // "发现" - banner图片数组
     ,hotBuildingList_Arr: []                            // "发现" - "热门房源"内容
     ,hotBuildingArr: []                                 // 去掉[0]

@@ -6,7 +6,7 @@
             <mu-tab value="tab2" title="写字楼"   @click = "showbuildingList('building')" />
             <mu-tab value="tab3" title="联合办公" @click = "showbuildingList('coWorking')" />
             <mu-tab value="tab4" title="工位"     @click = "showbuildingList('coWorking')" />
-            <mu-tab value="tab5" @active="handleActive" icon="search" title="筛选"/>
+            <mu-tab value="tab5" icon="search" title="筛选" @click = 'setStateToggle()' />
         </mu-tabs>
     </div>
 </template>
@@ -23,7 +23,18 @@ export default {
         this.getInitInfo()
     }
     ,methods: {
-        getInitInfo() {
+        // 目的: 改变 $store 内 '房源' 页 右侧抽屉 - 锁的状态
+        setStateToggle () {
+            let openState   = this.$store.state.globalToggle.houseResourceRightDrawer.open
+                ,dockedState  = this.$store.state.globalToggle.houseResourceRightDrawer.docked
+
+            this.$store.dispatch({
+                type        : 'setHouseResourceDrawer'
+                ,openState  : !openState
+                ,dockedState: !dockedState
+            })
+        }
+        ,getInitInfo() {
             // console.log( '选择了联合办公' )
             this.$store.dispatch({
                 type: 'setHouseListBType',
@@ -35,12 +46,7 @@ export default {
         ,handleTabChange(val) {
             this.activeTab = val
         }
-        ,handleActive() {
-            // 暂无处理
-            window.alert('右侧栏')
-        }
         ,showbuildingList( bType ) {
-
             // 改变数组时, 修改计数值
             const setBuildingNum = () => {
                 this.$store.dispatch({                                                          // 目的: 改变地图层级
@@ -48,7 +54,6 @@ export default {
                 })
             }
             setBuildingNum()
-
             if( bType == 'building' ) {
                 // console.log( '选择了building' )
                 this.$store.dispatch({
@@ -74,8 +79,6 @@ export default {
                     ,bType  : ''
                 })
             }
-
-
         }
     }
 }
@@ -98,4 +101,6 @@ export default {
         +REM(padding-right,$autoMargin/2)
         // 最后一个按钮 - 按键效果
 
+// 右侧抽屉 样式( 当点击'筛选'按钮时, 将右侧抽屉背景设为白色 )
+#rightDrawer
 </style>

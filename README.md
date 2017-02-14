@@ -98,8 +98,8 @@ App.vue ( 根节点 )
     - [x] 家具详情 - 接口数据
     - [ ] 外出考察详情 - 接口数据
     - [ ] 关于艾迦办公 详情页面
-    - [ ] 办公电脑 - 内容图片修改( 静态页 )
-    - [ ] 员工培训( 静态页面 )
+    - [x] 办公电脑 - 内容图片修改( 静态页 )
+    - [x] 员工培训( 静态页面 )
     - [ ] 委托找房( 表单提交 )
     - [ ] 后期将modules 分出
     - [ ] 根据静态View需求,将改好的内容 合并起来
@@ -122,8 +122,8 @@ App.vue ( 根节点 )
     - [ ] 减少HTML内容重复描述样式
     - [ ] 增加`Gulp`构建流,优化静态图片( 进行无损压缩,避免资源加载过慢问题 )
     - [ ] 测试Router动态加载组件方案,如果性能优于单一JS加载速度,那么全部拆为动态加载
-    - [ ] 增加Router切换动画,避免加载延迟空白
-    - [ ] 使用H5的history改善ajax列表请求体验
+    - [x] 增加Router切换动画,避免加载延迟空白
+    - [x] 使用H5的history改善ajax列表请求体验
     - [ ] 使用全局混合Mixins减少代码量
     - [ ] 优化Vuex的state结构; 分模块存放状态数据
     - [ ] 后台返回当前城市的中心坐标点或者字符串城市名称,然后放置到state当中储存。 在'地图'页面内进行渲染中心点
@@ -153,39 +153,3 @@ App.vue ( 根节点 )
 1. 变量名 / 方法名 开头需小写
 2. 使用驼峰命名法( 避免使用 破折号 / 下划线 连接两个单词 )
 
-***
-
-### 关于Axios跨域 提交参数总是失败问题测试结果( 通过一下代码测试百度音乐返回数据 )
-```js
-// 测试开放接口数据( 参数是否提交成功: 已成功! )
-axios.get('http://api.jirengu.com/fm/getSong.php/', qs.stringify({
-    // axios.post('http://localhost:3003/clients', qs.stringify({
-    'channel': "333"
-}))
-.then(function (response) {
-    let get_data = response
-    console.log('get_data值' + get_data)
-    console.dir(get_data)
-    // commit('addState',get_data)
-})
-.catch(function (error) {
-    console.log(error)
-});
-
-// 在一个Vuex的actions.js 的 任务中添加以上代码 ,当触发事件时执行这个请求
-```
-
-> 经过测试 这个请求可以返回正确的数据. 所以服务器端需要修改配置
-
-
-#### 参考链接:
-
-[How does Access-Control-Allow-Origin header work?](http://stackoverflow.com/questions/10636611/how-does-access-control-allow-origin-header-work)
-
-[cannot get cross-site POST to work #191](https://github.com/mzabriskie/axios/issues/191)
-
-[npm.js Axios](https://www.npmjs.com/package/axios)
-
-[Axios 中文说明](https://www.kancloud.cn/yunye/axios/234845)
-
-[Axios请求文档](https://zq99299.gitbooks.io/vue-note/chapter/axios.html)

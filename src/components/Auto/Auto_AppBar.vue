@@ -18,9 +18,20 @@
                 <mu-list-item title="版权信息"   @click="toAboutInfo( 'copyrightInfo' )" />
             </mu-list>
         </mu-drawer>
+        <!-- 隐藏右侧 ( 通过$store 状态操作 这个drawer显示隐藏 )-->
+        <mu-drawer right :open = "getHouseResourceDrawer.open" :docked = "getHouseResourceDrawer.docked"  @close = "setStateToggle()" >
+            <mu-list>
+                <mu-list-item title=" 筛选条件 - 区域 "/>
+                <mu-list-item title=" 筛选条件 - 面积 "/>
+                <mu-list-item title=" 筛选条件 - 价格 "/>
+                <mu-list-item title=" 筛选条件 - 装修 "/>
+            </mu-list>
+        </mu-drawer>
     </mu-appbar>
 </template>
+
 <script>
+import  { mapActions, mapGetters }  from    'vuex'
 export default {
     data () {
         return {
@@ -39,9 +50,24 @@ export default {
         ,toSearch: function() {
             location.href = '#/search/'
         }
+        // 目的: 改变 $store 内 '房源' 页 右侧抽屉 - 锁的状态
+        ,setStateToggle() {
+            let openState       = this.$store.state.globalToggle.houseResourceRightDrawer.open
+                ,dockedState    = this.$store.state.globalToggle.houseResourceRightDrawer.docked
+
+            this.$store.dispatch({
+                type        : 'setHouseResourceDrawer'
+                ,openState  : !openState
+                ,dockedState: !dockedState
+            })
+        }
     }
+    ,computed: mapGetters({
+        getHouseResourceDrawer: 'getHouseResourceDrawer'
+    })
 }
 </script>
+
 <style lang="sass">
 @import '../../sass/main'
 
@@ -65,10 +91,10 @@ export default {
         color: $theme-color !important
     .mu-appbar-title
         width: 0 !important
-    .left
+    >.left
         left: 0
         width: 14%
-    .right
+    >.right
         right: 0
         width: 14%
         .mu-text-field                                                              // 相对定位( 中间输入框 )

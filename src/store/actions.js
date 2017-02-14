@@ -1,7 +1,7 @@
 import  Vue      from    'vue'
 import  axios    from    'axios'
 const   qs = require('qs')
-import * as types from './mutations'
+import  * as types from './mutations'
 // 设置ContentType
 // axios.defaults.headers.post['Content-Type'] = 'application/json'
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
@@ -15,9 +15,6 @@ axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded
 // http://www.punesubji.com/store/rest/products
 
 export const addState = ({commit}) => {
-    // 本地JSON
-    // axios.post('./static/data.json')
-
     // 使用QS获取数据
     axios.post('http://app.aplusoffice.cn/api/index',qs.stringify({ 'cityCode':3702, 'page': 1 }))
     .then(function (response) {
@@ -56,32 +53,6 @@ export const getFurnitureInfo = ({commit}) => {
 
 //获得 "外出详情" - 数据
 export const getResearchInfo = ({commit}) => {
-    //  // 静态json
-    // axios.post( './static/researchInfo_1.json', {
-    //     // code: 'ig0001'
-    // })
-    // .then(function (response) {
-    //     let get_ResearchInfoData = response.data.resultData
-    //     // console.log(response)
-    //     commit('addResearchInfo',get_ResearchInfoData)
-    // })
-    // .catch(function (error) {
-    //     console.log(error);
-    // })
-
-    // axios跨域解决方案( 原生方法 )
-    // var params = new URLSearchParams();
-    // params.append('code', 'ig0003');
-    // axios.post('http://app.aplusoffice.cn/api/es/getInvestigate', params)
-    // .then(function (response) {
-    //     let get_ResearchInfoData = response.data.resultData
-    //     // console.log(response)
-    //     commit('addResearchInfo',get_ResearchInfoData)
-    // })
-    // .catch(function (error) {
-    //     console.log(error);
-    // })
-
     // 使用QS获取数据
     axios.post('http://app.aplusoffice.cn/api/es/getInvestigate',qs.stringify({ 'code': 'ig0003' }))
     .then(function (response) {
@@ -95,30 +66,6 @@ export const getResearchInfo = ({commit}) => {
 
 //获得 "联合办公" - 数据
 export const setCoWorkingInfo = ({commit},Obj) => {
-     // 静态json
-    // axios.post( './static/buildingDetails_CoWorking_1.json', {
-    //     // code: 'ig0001'
-    // })
-    // .then(function (response) {
-    //     let set_CoWorkingInfo = response.data.resultData
-    //     commit('addCoWorkingInfo',set_CoWorkingInfo)
-    // })
-    // .catch(function (error) {
-    //     console.log(error);
-    // })
-
-    // Axios原生方法传参( 不支持ios )
-    // var params = new URLSearchParams();
-    // params.append('code',Obj.codeId);
-    // axios.post('http://app.aplusoffice.cn/api/building/getH5BuildingByCode', params)
-    // .then(function (response) {
-    //     let set_CoWorkingInfo = response.data.resultData
-    //     commit('addCoWorkingInfo',set_CoWorkingInfo)
-    // })
-    // .catch(function (error) {
-    //     console.log(error)
-    // })
-
     // 使用QS获取数据
     axios.post('http://app.aplusoffice.cn/api/building/getH5BuildingByCode',qs.stringify({ 'code': Obj.codeId }))
     .then(function (response) {
@@ -131,24 +78,6 @@ export const setCoWorkingInfo = ({commit},Obj) => {
 }
 //获得 "办公楼详情" - 数据
 export const setOfficeBuildingInfo = ({commit},Obj) => {
-    // 静态json
-    // axios.post( './static/buildingDetails_OfficeBuilding_1.json', {
-    //     // code: 'ig0001'
-    // })
-
-    // Axios原生方法传参( 不支持ios )
-    // var params = new URLSearchParams();
-    // params.append('code',Obj.codeId);
-    // axios.post('http://app.aplusoffice.cn/api/building/getH5BuildingByCode', params)
-    // .then(function (response) {
-    //     let set_OfficeBuildingInfo = response.data.resultData
-    //     // console.dir(set_OfficeBuildingInfo)
-    //     commit('addOfficeBuildingInfo',set_OfficeBuildingInfo)
-    // })
-    // .catch(function (error) {
-    //     console.log(error)
-    // })
-
     // qs方法传参数
     axios.post('http://app.aplusoffice.cn/api/building/getH5BuildingByCode', qs.stringify({
         'code': Obj.codeId
@@ -166,19 +95,6 @@ export const setOfficeBuildingInfo = ({commit},Obj) => {
 
 // 地图初始数据( 获取行政区数据 )
 export const setRegionPointList = ({commit},Obj) => {
-    // Axios原生方法传参( 不支持ios )
-    // var params = new URLSearchParams();
-    // params.append('cityCode',Obj.cityCode);
-    // axios.post('http://app.aplusoffice.cn/api/map/getRegionPointList', params)
-    // .then(function (response) {
-    //     let set_RegionPointList = response.data.resultData
-    //     // console.dir(set_RegionPointList)
-    //     commit('addRegionPointList',set_RegionPointList)
-    // })
-    // .catch(function (error) {
-    //     console.log(error)
-    // })
-
     // qs方法传参数
     axios.post('http://app.aplusoffice.cn/api/map/getRegionPointList', qs.stringify({ 'cityCode': Obj.cityCode }))
     .then(function (response) {
@@ -377,4 +293,13 @@ export const setHouseListBType = ({commit},Obj) => {
 // 改变数组时, 修改计数值
 export const setBuildingNum = ({commit}) => {
     commit('addBuildingNum')
+}
+
+// 改变全局 '锁'状态管理中 - '房源'页 - 右侧抽屉 - 状态
+export const setHouseResourceDrawer = ({commit}, Obj ) => {
+    // console.log( Obj.openState )
+    // console.log( Obj.dockedState )
+    // console.log( Obj )
+
+    commit('addHouseResourceDrawer', Obj)
 }
