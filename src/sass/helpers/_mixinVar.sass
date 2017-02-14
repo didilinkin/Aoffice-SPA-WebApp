@@ -143,6 +143,14 @@ $autoMargin: 16px
     +REM(padding-right,$right)
     +REM(padding-bottom,$bottom)
     +REM(padding-left,$left)
+// 可定义宽度( 并转换成REM )的混合
+=imgCover($width)
+    +REM(width, $width)
+    object-fit: cover
+// 圆角混合( 接受圆角百分比值 )
+=radiusSize( $color )
+    border-radius: $color
+
 // 通用修饰下划线
 %auto--borderBottomSoild
     border-bottom: 1px solid rgba($badgeFont-color,.3)

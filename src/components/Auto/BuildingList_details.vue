@@ -10,7 +10,6 @@
                 {{ building_details.priceDayMin }} 元/m²/天起
             </mu-raised-button>
         </div>
-
         <!-- 数据列表 - ( 写字楼 ) -->
         <div class="details__numValue" v-if="building_details.judgeShow">
             <p class="numValue">
@@ -23,7 +22,6 @@
                 <b> {{ building_details.amount3 }} </b> 套待租
             </p>
         </div>
-
         <!-- 数据列表 - ( 联合办公 ) -->
         <div class="details__numValue" v-else>
             <!-- N套办公空间 -->
@@ -55,6 +53,9 @@ export default { props: ['building_details'] }
     .details__price
         display: flex
         flex-wrap: wrap
+        // 设置 价格 / 租金 等信息展现按钮的宽度样式
+        >.mu-raised-button
+            +REM( min-width, 120px )
         /* 设置两侧的padding空余 */
         .mu-raised-button-wrapper
             +REM(padding-left,15px)

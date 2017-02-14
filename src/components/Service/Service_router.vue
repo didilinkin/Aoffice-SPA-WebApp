@@ -18,6 +18,7 @@
 </template>
 
 <script>
+import  VueRouter           from    'vue-router'
 import  FindProperties      from    './Router-views/FindProperties.vue'
 import  PutInProperties     from    './Router-views/PutInProperties.vue'
 import  Furniture           from    './Router-views/Furniture.vue'
@@ -58,7 +59,9 @@ export default {
         },
         // 目的: 执行跳转
         returnService: () => {
-            location.href = '#/service/'
+            // location.href = '#/service/'
+            const router = new VueRouter()      // 使用router操作history
+            router.go(-1)
         }
     },
     components: components

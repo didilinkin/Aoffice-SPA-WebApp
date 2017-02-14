@@ -2,41 +2,25 @@
 <template>
     <div id="serviceIcon">
         <Title :title_info=title_info />
+        <!-- '服务页' 图标按钮 -->
         <div class="serviceIcon__box">
-            <div class="serviceIcon__item">
-                <mu-float-button icon="event_seat" class="demo-float-button"/>
-                <p> 办公家具 </p>
-            </div>
-
-            <div class="serviceIcon__item">
-                <mu-float-button icon="format_paint" class="demo-float-button"/>
-                <p> 办公装修 </p>
-            </div>
-
-            <div class="serviceIcon__item">
-                <mu-float-button icon="edit" class="demo-float-button"/>
-                <p> 外出考察 </p>
-            </div>
-
-            <div class="serviceIcon__item">
-                <mu-float-button icon="assignment_ind" class="demo-float-button"/>
-                <p> 员工培训 </p>
-            </div>
-
-            <div class="serviceIcon__item">
-                <mu-float-button icon="desktop_windows" class="demo-float-button"/>
-                <p> 办公电脑 </p>
+            <div v-for = "item in serviceIcon__Arr" class="serviceIcon__item" @click = 'toSearchDetails( item.urlId )'>
+                <!-- Material 图标 -->
+                <!--<mu-float-button :icon="item.iconClass" class="demo-float-button"/>-->
+                <!-- 设计UI 图标 -->
+                <div>
+                    <img :src=" item.imgIcon " />
+                </div>
+                <p> {{ item.title_info }} </p>
             </div>
         </div>
-
+        <!-- '服务页'表单 - 按钮 -->
         <div class="serviceFormBtn--box">
-            <!-- 委托找房 -->
-            <div class="serviceFormBtn">
-                <mu-raised-button class="demo-raised-button" icon="android" backgroundColor="#a4c639" />
-            </div>
-            <!-- 投放房源 -->
-            <div class="serviceFormBtn">
-                <mu-raised-button class="demo-raised-button" icon="android" backgroundColor="#a4c639" />
+            <!-- 委托找房 / 投放房源 -->
+            <div v-for = " item in serviceFormBtn_imgUrl " class="serviceFormBtn" @click = 'toSearchDetails( item.urlId )'>
+                <img :src=" item.imgUrl " />
+                <h4> {{ item.title_info }} </h4>
+                <p> {{ item.subTitle }} </p>
             </div>
         </div>
     </div>
@@ -53,9 +37,62 @@ export default {
                 title: '企业服务',
                 backgroundColor: '#FFF'
             }
+            // '服务页' - 链接按钮
+            ,serviceIcon__Arr: [
+                {
+                    iconClass   : 'event_seat'
+                    ,title_info : '办公家具'
+                    ,imgIcon    : require('../../assets/images/furniture.png')
+                    ,urlId      : 'furniture'
+                }
+                ,{
+                    iconClass   : 'format_paint'
+                    ,title_info : '办公装修'
+                    ,imgIcon    : require('../../assets/images/brush.png')
+                    ,urlId      : 'decoration'
+                }
+                ,{
+                    iconClass   : 'edit'
+                    ,title_info : '外出考察'
+                    ,imgIcon    : require('../../assets/images/pen.png')
+                    ,urlId      : 'research'
+                }
+                ,{
+                    iconClass   : 'assignment_ind'
+                    ,title_info : '员工培训'
+                    ,imgIcon    : require('../../assets/images/people.png')
+                    ,urlId      : 'training'
+                }
+                ,{
+                    iconClass   : 'desktop_windows'
+                    ,title_info : '办公电脑'
+                    ,imgIcon    : require('../../assets/images/computer.png')
+                    ,urlId      : 'computer'
+                }
+            ]
+            // '服务表单' 按钮图片链接
+            ,serviceFormBtn_imgUrl: [
+                {
+                    imgUrl      : require('../../assets/images/ico_entrust.png')
+                    ,title_info : '委托找房'
+                    ,subTitle   : '快速找到心仪办公室'
+                    ,urlId      : 'findProperties'
+                }
+                ,{
+                    imgUrl: require('../../assets/images/ico_put_in.png')
+                    ,title_info : '投放房源'
+                    ,subTitle   : '为您快速出租闲置房源'
+                    ,urlId      : 'putInProperties'
+                }
+            ]
         }
-    },
-    components: components
+    }
+    ,methods: {
+        toSearchDetails: function( toPageId ) {
+            location.href = '#/service/' + toPageId
+        }
+    }
+    ,components: components
 }
 </script>
 
@@ -77,12 +114,20 @@ export default {
         +REM(width, 50px)
         +REM(height, 50px)
         box-shadow: none
-        +bC($theme-color)
+        +bC(rgba($title-color-light,.2))
     // 服务页链接 原型按钮 —— 盒子容器( 包5个 )
     .serviceIcon__box
         @extend %flexCenter
         .serviceIcon__item
             flex: 1
+            // 服务页链接 - 圆形图标div
+            >div
+                margin: 0 auto
+                +REM(width, 60px)
+                +radiusSize( 50% )
+                +bC( rgba( $badgeFont-color, .2 ) )
+                >img
+                    width: 100%
             >p
                 color: $title-color
                 font-weight: 400
@@ -96,6 +141,7 @@ export default {
         +REM(padding-top, $autoMargin)
         +REM(padding-bottom, $autoMargin)
         +bC($base-color)
+        // 服务表单 - 按钮
         .serviceFormBtn
             flex: 1
             padding: 0
@@ -112,4 +158,14 @@ export default {
                 box-shadow: none
                 .mu-icon
                     color: $theme-color !important
+            // 服务表单 —— 按钮图片 样式
+            >img
+                +imgCover(40px)
+            >h4
+                +REM(font-size, $title-size*1.2)
+                +REM(line-height, $bigTitle-size*1.5)
+                color: $EnterpriseService-color
+            >p
+                +REM(font-size, $badge-size/2)
+                color: $badgeFont-color
 </style>

@@ -68,6 +68,10 @@ export default {
     // 搜索class( 使用文本框无法触发@click事件 )
     .discoverAppBar__search
         @extend %flexCenter                                                         // 控制居中
+        // '首页' - 顶部appBar - 搜索栏按钮样式
+        .mu-icon-button
+            +REM(width, 40px)
+            +REM(height, 40px)
     .left
         left: 0
         width: 14%

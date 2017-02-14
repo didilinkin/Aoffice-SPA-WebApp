@@ -8,7 +8,9 @@
 </template>
 
 <script>
-export default { props: ['box_info'] }
+export default {
+    props: ['box_info']
+}
 </script>
 
 <style lang="sass" scoped>

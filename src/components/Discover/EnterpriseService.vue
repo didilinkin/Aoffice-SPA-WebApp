@@ -1,4 +1,4 @@
-<!-- "发现"页面 - "企业服务"组件 - 1 -->
+<!-- "发现"页面 - "企业服务"组件 -->
 <template>
     <div id="enterpriseService">
         <Title :title_info=title_info />

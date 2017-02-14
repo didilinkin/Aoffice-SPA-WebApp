@@ -3,7 +3,6 @@
     <ul class="buildingDetails_List">
         <li v-for = "item in buildingDetailsList_Arr">
             <img :src="item.imgUrl">
-
         </li>
     </ul>
 </template>

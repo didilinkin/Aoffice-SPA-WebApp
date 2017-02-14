@@ -48,27 +48,33 @@ export default {
         }
         // 目的: 监听向上滑动
         ,watchScrollY() {
-            window.onscroll = () => {
-                let yValue              = window.scrollY
-                    ,discoverAppBarObj  = document.getElementById('discoverAppBar')                     // 获得顶部appBar元素
-                    ,btnArr             = document.getElementsByClassName('material-icons')             // 检索按钮数组( 需要的只是前三个 ) 改变其样式( 强调 )
-                    ,inputObj           = document.getElementsByClassName('discoverAppBar__search')[0]  // 顶部appBar部分 - 输入框样式改变( 当屏幕下滑时 )
+            let homePage_appBar_Obj = document.getElementById('discoverAppBar')
+            if( homePage_appBar_Obj != null ){
+                // console.log('在首页')
+                window.onscroll = () => {
+                    let yValue              = window.scrollY
+                        ,discoverAppBarObj  = document.getElementById('discoverAppBar')                     // 获得顶部appBar元素
+                        ,btnArr             = document.getElementsByClassName('material-icons')             // 检索按钮数组( 需要的只是前三个 ) 改变其样式( 强调 )
+                        ,inputObj           = document.getElementsByClassName('discoverAppBar__search')[0]  // 顶部appBar部分 - 输入框样式改变( 当屏幕下滑时 )
 
-                if( yValue <= 0 ) {
-                    discoverAppBarObj.setAttribute('style', 'background-color: rgba(255, 255, 255, 0.1)')
-                    // 修改顶部appBar 按钮样式
-                    for(let i = 0; i < 3; i++) {
-                        btnArr[i].setAttribute('style', 'color: #FFF !important')
+                    if( yValue <= 0 ) {
+                        discoverAppBarObj.setAttribute('style', 'background-color: rgba(255, 255, 255, 0.1)')
+                        // 修改顶部appBar 按钮样式
+                        for(let i = 0; i < 3; i++) {
+                            btnArr[i].setAttribute('style', 'color: #FFF !important')
+                        }
+                        inputObj.setAttribute('style', 'background-color: none !important')
+                    } else {
+                        discoverAppBarObj.setAttribute('style', 'background-color: rgba(255, 255, 255, 0.95) !important; box-shadow: 0px 0px 5px 5px #FFF')
+                        // 修改顶部appBar 按钮样式
+                        for(let i = 0; i < 3; i++) {
+                            btnArr[i].setAttribute('style', 'color: rgb(255,94,27) !important')
+                        }
+                        inputObj.setAttribute('style', 'background-color: rgba(156,157,159, .3) !important')
                     }
-                    inputObj.setAttribute('style', 'background-color: none !important')
-                } else {
-                    discoverAppBarObj.setAttribute('style', 'background-color: rgba(255, 255, 255, 0.95) !important; box-shadow: 0px 0px 5px 5px #FFF')
-                    // 修改顶部appBar 按钮样式
-                    for(let i = 0; i < 3; i++) {
-                        btnArr[i].setAttribute('style', 'color: rgb(255,94,27) !important')
-                    }
-                    inputObj.setAttribute('style', 'background-color: rgba(156,157,159, .3) !important')
                 }
+            } else {
+                // console.log( '非首页' )
             }
         }
         // 改变底部按钮状态样式
