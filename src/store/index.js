@@ -16,7 +16,8 @@ const state = {
     ,loadingState: {
         judgeShow: true
     }                                                   // 加载动画状态
-    ,globalToggle: {                                    // 全局 '锁'的状态管理
+    // 全局 '锁'的状态管理
+    ,globalToggle: {
         houseResourceRightDrawer: {                     // '房源'页 - 右侧 - 抽屉锁
             open    : false
             ,docked : true
@@ -83,6 +84,34 @@ const state = {
         ,saveIndexLevelNum_Arr: []                                      // 记录当前层级检索次数( 比较是否是在当前层级进行检索 )
     }
     ,searchMapRequest_Arr: []                                           // 当发生地图检索请求时,向内推入一个空对象( 触发watch观察事件 )
+    // 管理 '地图' 全部状态 与 全部数据
+    ,map: {
+        // 检索参数
+        searchParameter: {
+            cityCode                : ''                    // 城市Code
+            ,regionCode             : ''                    // 行政区Code
+            ,businessCircleCode     : ''                    // 商圈Code
+            ,bType                  : ''                    // 检索类型( 必选 )
+            ,priceDayMin            : '0'                   // 日价 - 最小值
+            ,priceDayMax            : ''                    // 日价 - 最大值
+            ,priceMonthMin          : '0'                   // 月价 - 最小值
+            ,priceMonthMax          : ''                    // 月价 - 最大值
+            ,decoration             : ''                    // 装修( A:豪装; B:精装; C:简装; D:毛坯 )
+        }
+        // 地图状态
+        ,mapState: {
+            indexLevel              : 'administrative'      // 行政区: administrative; 商圈: business; 具体: building
+            ,openMapNum             : []                    // 记录 '地图' 页面打开次数 - 判断初始化
+            ,changeIndexLevelNum    : []                    // 记录 '地图' 层级改变次数 - 判断事件是否改变层级
+            ,requestNum             : []                    // 记录 '地图' 检索事件次数 - 回调判断检索事件内容
+        }
+        // 返回结果
+        ,result: {
+            administrative          : []                    // 行政区
+            ,business               : []                    // 商圈
+            ,building               : []                    // 具体建筑物
+        }
+    }
 }
 const store = new Vuex.Store({
     state,

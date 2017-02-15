@@ -182,7 +182,7 @@ export default {
                 ,requestLength          = this.$store.state.searchMapRequest_Arr.length                     // 判断是否是第一次加载
                 ,openMapViewNumLength   = this.$store.state.searchValue.openMapViewNum_Arr.length           // 页面加载次数
                 ,indexLevelNumLength    = this.$store.state.searchValue.setIndexLevelNum_Arr.length         // 层级改变次数值
-                ,saveIndexLevelNum    = this.$store.state.searchValue.saveIndexLevelNum_Arr                 // 记录当前层级检索次数( 比较是否是在当前层级进行检索 )
+                ,saveIndexLevelNum      = this.$store.state.searchValue.saveIndexLevelNum_Arr               // 记录当前层级检索次数( 比较是否是在当前层级进行检索 )
             // 保存data值
             let indexLevelConst         = this.$data.indexLevelConst                                        // data: 层级
                 ,openMapViewNum_const   = this.$data.openMapViewNum_const                                   // data: 打开页面的次数

@@ -171,7 +171,6 @@ export default {
                 ,priceDayMaxState       = this.$store.state.searchValue.priceDayMax
                 ,decorationState        = this.$store.state.searchValue.decoration
 
-
             if ( btypeState == 'A' ) {
                 console.log(' 检索写字楼全部条件 ')
                 // console.log('写字楼当前层级' + indexLevel)     // 测试当前层级( 成功 )
