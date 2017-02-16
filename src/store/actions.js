@@ -300,6 +300,14 @@ export const setHouseResourceDrawer = ({commit}, Obj ) => {
     // console.log( Obj.openState )
     // console.log( Obj.dockedState )
     // console.log( Obj )
-
     commit('addHouseResourceDrawer', Obj)
+}
+
+// 保存检索条件
+export const saveParameter = ( {commit}, Obj ) => {
+    // let attrArr = Object.keys( Obj.attrObj )
+    // console.log( attrArr )
+    // console.log( arrA )
+    // console.log( parameterObj.bType )
+    commit('addParameter', Obj)
 }

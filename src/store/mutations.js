@@ -330,3 +330,14 @@ export const addHouseResourceDrawer = ( state, res ) => {
     state.globalToggle.houseResourceRightDrawer.open    = res.openState
     state.globalToggle.houseResourceRightDrawer.docked  = res.dockedState
 }
+
+// 保存检索条件
+export const addParameter = ( state, res ) => {
+    let attrNameArr = Object.keys( res.attrObj )
+    for( let i = 0; i < attrNameArr.length; i++ ) {
+        state.map.searchParameter[ attrNameArr[i] ] = res.attrObj[attrNameArr[i]]   // 保存( 属性名 + 属性值 ) $store内的检索条件
+    }
+    // $store保存好 地图检索值, 更改 '请求次数' 数组的状态
+    let null_Obj = {}                                                                                                       // 创建一个空对象
+    state.map.mapState.requestNum.push(null_Obj)
+}
