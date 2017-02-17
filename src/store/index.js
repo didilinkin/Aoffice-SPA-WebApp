@@ -55,41 +55,12 @@ const state = {
         buildingRelationList_judgeShow: true,
         nameInfo: '0'
     }
-    ,regionPointList: []                                        // '地图' 初始数据( 获取行政区数据 )
-    ,BCPointList: []                                            // '地图' 商圈数据
-    ,buildingPointList: []                                      // '地图' 写字楼数据
-    ,mapView: {
-         typeRegionPointList: []                                // 经过检索后的行政区数据( 类型判断 )
-    }
-    // 检索状态集( 下拉菜单 / 层级改变 都可以修改这个检索集合 )
-    ,searchValue: {
-        // 地图层级检索条件
-        cityCode:               ''                                      // 检索城市code
-        ,indexLevel:            'administrative'                        // 行政区: administrative; 商圈: business; 具体: building
-        ,regionCode:            ''                                      // 行政区编号
-        ,businessCircleCode:    ''                                      // 商圈编号
-        // 下拉菜单检索条件
-        ,btype:                 'A'                                     // 检索类型( 只有A / B 选项 )
-        ,priceDayMin:           '0'                                     // 价格( 天 )最小值
-        ,priceDayMax:           ''                                      // 价格( 天 )最大值
-        ,priceMonthMin:         '0'                                     // 价格( 月 )最小值
-        ,priceMonthMax:         ''                                      // 价格( 月 )最大值
-        ,decoration:            ''                                      // 装修( A:豪装; B:精装; C:简装; D:毛坯 )
-        // 经过检索后的渲染对象
-        ,administrative_Arr:    []                                      // 行政区数组
-        ,business_Arr:          []                                      // 商圈数组
-        ,building_Arr:          []                                      // 办公楼数组
-        ,openMapViewNum_Arr:    []                                      // 当从别的页面切入Map页面时,向内推入一个空对象( 触发watch观察事件 )
-        ,setIndexLevelNum_Arr:  []                                      // 当层级改变的时候, 向内推一个空对象( 判断事件是否不改变层级 )
-        ,saveIndexLevelNum_Arr: []                                      // 记录当前层级检索次数( 比较是否是在当前层级进行检索 )
-    }
-    ,searchMapRequest_Arr: []                                           // 当发生地图检索请求时,向内推入一个空对象( 触发watch观察事件 )
     // 管理 '地图' 全部状态 与 全部数据
     ,map: {
         // 检索参数
         searchParameter: {
-            cityCode                : '3702'                // 城市Code
-            ,regionCode             : ''                    // 行政区Code
+            // cityCode                : '3702'             // 城市Code( 接口交互时, 采用当前城市cityCode )
+            regionCode              : ''                    // 行政区Code
             ,businessCircleCode     : ''                    // 商圈Code
             ,bType                  : ''                    // 检索类型( 必选 )
             ,priceDayMin            : '0'                   // 日价 - 最小值
@@ -104,8 +75,8 @@ const state = {
             ,indexLevel             : 'administrative'      // 行政区: administrative; 商圈: business; 具体: building
             ,openMapNum             : []                    // 记录 '地图' 页面打开次数 - 判断初始化
             ,changeIndexLevelNum    : []                    // 记录 '地图' 层级改变次数 - 判断事件是否改变层级
-            ,requestNum             : []                    // 记录 '地图' 检索事件次数 - 回调判断检索事件内容
-            ,resultNum              : []                    // 记录返回结果 次数
+            ,requestNum             : []                    // 记录 '地图' 发起检索事件次数 - 回调判断检索事件内容( 需监听 )
+            ,resultNum              : []                    // 记录返回结果 次数( 需监听 )
         }
         // 返回结果
         ,resultArr                  : []                    // 所有类型结果( 行政区 + 商圈 + 具体建筑物 )

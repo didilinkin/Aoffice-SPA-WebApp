@@ -374,3 +374,11 @@ export const resetMapState = ( state ) => {
     let null_Obj = {}                                                                                                       // 创建一个空对象
     state.map.mapState.openMapNum.push(null_Obj)
 }
+
+// 地图检索: 接口返回数据保存( 3个类型 )
+export const saveResult = ( state, res ) => {
+    state.map.resultArr = res
+    // $store保存 返回结果成功( 计数, 触发View层数据改变 )
+    let null_Obj = {}                                                                                                       // 创建一个空对象
+    state.map.mapState.resultNum.push(null_Obj)
+}

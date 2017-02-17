@@ -279,11 +279,6 @@ export const setHouseListBType = ({commit},Obj) => {
     });
 }
 
-// 改变数组时, 修改计数值
-export const setBuildingNum = ({commit}) => {
-    commit('addBuildingNum')
-}
-
 // 改变全局 '锁'状态管理中 - '房源'页 - 右侧抽屉 - 状态
 export const setHouseResourceDrawer = ({commit}, Obj ) => {
     // console.log( Obj.openState )
@@ -305,4 +300,69 @@ export const initOpenMapNum = ( { commit } ) => {
 // 重置 检索参数 + openMapNum次数( 当加载地图数超20次时, 将检索参数 与 页面打开次数重置, 重载初始数据 )
 export const resetState = ( { commit } ) => {
     commit('resetMapState')
+}
+
+// 地图检索: 行政区接口检索
+export const getAdministrativeResult = ( { commit }, Obj ) => {
+    axios.post('http://app.aplusoffice.cn/api/map/getRegionPointList', qs.stringify({
+        'cityCode'      : Obj.cityCode
+        ,'bType'        : Obj.bType
+        ,'priceMonthMin': Obj.priceMonthMin
+        ,'priceMonthMax': Obj.priceMonthMax
+        ,'priceDayMin'  : Obj.priceDayMin
+        ,'priceDayMax'  : Obj.priceDayMax
+        ,'decoration'   : Obj.decoration
+    }))
+    .then(function(response) {
+        let administrativeResult = response.data.resultData
+        // console.log( administrativeResult )
+        commit('saveResult', administrativeResult)
+    })
+    .catch(function (error) {
+        console.log(error)
+    });
+}
+
+// 地图检索: 商圈接口检索
+export const getBusinessResult = ( { commit }, Obj ) => {
+    axios.post('http://app.aplusoffice.cn/api/map/getBCPointList', qs.stringify({
+        'cityCode'      : Obj.cityCode
+        ,'regionCode'   : Obj.regionCode
+        ,'bType'        : Obj.bType
+        ,'priceDayMin'  : Obj.priceDayMin
+        ,'priceDayMax'  : Obj.priceDayMax
+        ,'priceMonthMin': Obj.priceMonthMin
+        ,'priceMonthMax': Obj.priceMonthMax
+        ,'decoration'   : Obj.decoration
+    }))
+    .then(function(response) {
+        let businessResult = response.data.resultData
+        // console.log( businessResult )
+        commit('saveResult', businessResult)
+    })
+    .catch(function (error) {
+        console.log(error)
+    });
+}
+
+// 地图检索: '具体'接口检索
+export const getBuildingResult = ( { commit }, Obj ) => {
+    axios.post('http://app.aplusoffice.cn/api/map/getBuildingPointList', qs.stringify({
+        'cityCode'              : Obj.cityCode
+        ,'businessCircleCode'   : Obj.businessCircleCode
+        ,'bType'                : Obj.bType
+        ,'priceDayMin'          : Obj.priceDayMin
+        ,'priceDayMax'          : Obj.priceDayMax
+        ,'priceMonthMin'        : Obj.priceMonthMin
+        ,'priceMonthMax'        : Obj.priceMonthMax
+        ,'decoration'           : Obj.decoration
+    }))
+    .then(function(response) {
+        let buildingResult = response.data.resultData
+        // console.log( buildingResult )
+        commit('saveResult', buildingResult)
+    })
+    .catch(function (error) {
+        console.log(error)
+    });
 }
