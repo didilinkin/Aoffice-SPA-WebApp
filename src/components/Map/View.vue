@@ -13,7 +13,7 @@ export default {
         }
     }
     ,mounted: function() {
-        this.firstLoading()         // 未来要将切换进来时的 状态清空
+        this.firstLoading()
     }
     ,methods: {
         // 目的: 状态清空
@@ -41,9 +41,9 @@ export default {
             let city_Longitude  = this.$store.state.city.cityLongitude
                 ,city_Latitude  = this.$store.state.city.cityLatitude
                 ,zoomNum        = this.$store.state.map.mapState.zoomNum
-            const miniMap       = new BMap.Map("mapView", {enableMapClick:false})           // 创建Map实例(关闭底图可点功能)
-            const miniMapPoint  = new BMap.Point( city_Longitude, city_Latitude)            // 标点位置( 青岛中心 )
-            miniMap.centerAndZoom(miniMapPoint, zoomNum)                                       // 创建地图中心点,层级15级（并不显示标记）
+            const miniMap       = new BMap.Map("mapView", {enableMapClick:false})               //关闭底图可点功能
+            const miniMapPoint  = new BMap.Point( city_Longitude, city_Latitude)
+            miniMap.centerAndZoom(miniMapPoint, zoomNum)                                        // 层级
             miniMap.addControl(new BMap.NavigationControl({
                 anchor: BMAP_ANCHOR_TOP_RIGHT
                 ,type: BMAP_NAVIGATION_CONTROL_SMALL
@@ -147,7 +147,6 @@ export default {
                     this._text  = text
                     this._code  = code
                     this._zoom  = zoom
-                    // console.dir( this._point.lat )
                 }
                 rangeOverlay.prototype = new BMap.Overlay()
                 rangeOverlay.prototype.initialize = function( map ) {
@@ -198,7 +197,6 @@ export default {
                     let RangeOverlay = new rangeOverlay(
                         new BMap.Point( arr.latitude, arr.longitude ), text, code, zoom
                     )
-                    // console.log('次数'+ i);
                     baiduMap.addOverlay( RangeOverlay )
                 }
             }
@@ -206,18 +204,23 @@ export default {
             let addBuilding = ( ObjGroup, setZoom ) => {
 
             }
-
+            // 当层级小于12时 -> 修正样式( 缩小覆盖物面积 )
+            let zoomOutOverlay = () => {
+                for( let i = 0; i < resultArr.length; i++ ){
+                    let rangeOverlay_Obj = document.getElementById( resultArr[i].code )
+                    rangeOverlay_Obj.setAttribute('class','range-overlay')
+                }
+            }
             // 清楚当前地图上的覆盖物
             baiduMap.clearOverlays()
             // 判断当前层级 -> 渲染渲染覆盖物方法
-            switch( indexLevelState ) {
-                // 当 层级区间名称为 '具体' 时 -> 使用详细覆盖物方法
-                case 'building':
-                    addBuilding( resultArr, zoomState )
-                    break
-                default:
-                    addRangeOverlay( resultArr, zoomState )
-                    break
+            if( zoomState < 12 ) {                                  // 1.2覆盖物 -> 缩小覆盖物
+                addRangeOverlay( resultArr, zoomState )
+                zoomOutOverlay()
+            } else if ( zoomState >= 12 && zoomState < 15 ) {       // 1.2覆盖物
+                addRangeOverlay( resultArr, zoomState )
+            } else {                                                // 3覆盖物
+                addBuilding( resultArr, zoomState )
             }
         }
     }
@@ -252,8 +255,3 @@ export default {
 @import '../../sass/main'
 
 </style>
-
-// let city_Longitude  = this.$store.state.city.cityLongitude                          // 经度
-//     ,city_Latitude  = this.$store.state.city.cityLatitude
-//     ,zoom           = this.$store.state.map.mapState.zoomNum
-// this.$baiduMap( city_Longitude, city_Latitude, zoom )

@@ -126,16 +126,16 @@ export default {
                 parameterObj.decoration = ''
                 this.saveParameter( parameterObj )
             }else if( value == 3 ) {
-                parameterObj.decoration = '豪装'
+                parameterObj.decoration = 'A'
                 this.saveParameter( parameterObj )
             }else if( value == 4 ) {
-                parameterObj.decoration = '精装'
+                parameterObj.decoration = 'B'
                 this.saveParameter( parameterObj )
             }else if( value == 5 ) {
-                parameterObj.decoration = '简装'
+                parameterObj.decoration = 'C'
                 this.saveParameter( parameterObj )
             }else{
-                parameterObj.decoration = '毛坯'
+                parameterObj.decoration = 'D'
                 this.saveParameter( parameterObj )
             }
         }
