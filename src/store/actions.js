@@ -303,11 +303,17 @@ export const setHouseResourceDrawer = ({commit}, Obj ) => {
     commit('addHouseResourceDrawer', Obj)
 }
 
-// 保存检索条件
+// 保存地图检索条件( 地图 - 下拉选项触发 )
 export const saveParameter = ( {commit}, Obj ) => {
-    // let attrArr = Object.keys( Obj.attrObj )
-    // console.log( attrArr )
-    // console.log( arrA )
-    // console.log( parameterObj.bType )
     commit('addParameter', Obj)
+}
+
+// 向 $store 的 openMapNum次数 加一( 地图 - View初始时执行 )
+export const initOpenMapNum = ( { commit } ) => {
+    commit('addOpenMapNum')
+}
+
+// 重置 检索参数 + openMapNum次数( 当加载地图数超20次时, 将检索参数 与 页面打开次数重置, 重载初始数据 )
+export const resetState = ( { commit } ) => {
+    commit('resetMapState')
 }

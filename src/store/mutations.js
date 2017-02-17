@@ -341,3 +341,36 @@ export const addParameter = ( state, res ) => {
     let null_Obj = {}                                                                                                       // 创建一个空对象
     state.map.mapState.requestNum.push(null_Obj)
 }
+
+// 向 openMapNum 数组添加空对象( 用于记录 地图视图 打开次数 )
+export const addOpenMapNum = ( state ) => {
+    // $store保存好 地图打开次数值
+    let null_Obj = {}                                                                                                       // 创建一个空对象
+    state.map.mapState.openMapNum.push(null_Obj)
+}
+
+// 重置 检索参数 + openMapNum次数( 当加载地图数超20次时, 将检索参数 与 页面打开次数重置, 重载初始数据 )
+export const resetMapState = ( state ) => {
+    // 参数 - 重置
+    state.map.searchParameter.cityCode              = ''
+    state.map.searchParameter.regionCode            = ''
+    state.map.searchParameter.businessCircleCode    = ''
+    state.map.searchParameter.bType                 = ''
+    state.map.searchParameter.priceDayMin           = '0'
+    state.map.searchParameter.priceDayMax           = ''
+    state.map.searchParameter.priceMonthMin         = '0'
+    state.map.searchParameter.priceMonthMax         = ''
+    state.map.searchParameter.decoration            = ''
+    // 地图状态 - 重置
+    state.map.mapState.zoomNum                      = '11'
+    state.map.mapState.indexLevel                   = 'administrative'
+    state.map.mapState.openMapNum                   = []
+    state.map.mapState.changeIndexLevelNum          = []
+    state.map.mapState.requestNum                   = []
+    state.map.mapState.resultNum                    = []
+    // 地图返回结果数组 - 重置
+    state.map.resultArr                             = []
+    // $store保存好 地图打开次数值
+    let null_Obj = {}                                                                                                       // 创建一个空对象
+    state.map.mapState.openMapNum.push(null_Obj)
+}

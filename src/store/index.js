@@ -100,17 +100,15 @@ const state = {
         }
         // 地图状态
         ,mapState: {
-            indexLevel              : 'administrative'      // 行政区: administrative; 商圈: business; 具体: building
+            zoomNum                 : '11'                  // 地图当前层级( 具体数值 )
+            ,indexLevel             : 'administrative'      // 行政区: administrative; 商圈: business; 具体: building
             ,openMapNum             : []                    // 记录 '地图' 页面打开次数 - 判断初始化
             ,changeIndexLevelNum    : []                    // 记录 '地图' 层级改变次数 - 判断事件是否改变层级
             ,requestNum             : []                    // 记录 '地图' 检索事件次数 - 回调判断检索事件内容
+            ,resultNum              : []                    // 记录返回结果 次数
         }
         // 返回结果
-        ,result: {
-            administrative          : []                    // 行政区
-            ,business               : []                    // 商圈
-            ,building               : []                    // 具体建筑物
-        }
+        ,resultArr                  : []                    // 所有类型结果( 行政区 + 商圈 + 具体建筑物 )
     }
 }
 const store = new Vuex.Store({
