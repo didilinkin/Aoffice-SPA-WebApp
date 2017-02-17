@@ -3,16 +3,7 @@ import  axios    from    'axios'
 const   qs = require('qs')
 import  * as types from './mutations'
 // 设置ContentType
-// axios.defaults.headers.post['Content-Type'] = 'application/json'
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-
-// 设置token
-// axios.defaults.headers.common['x-auth-token'] = 'x-auth-token';
-// axios.defaults.headers.common['x-requested-from'] = 'apiHttpRequest';
-
-// 免费测试接口 GET方式 :
-// https://jsonplaceholder.typicode.com/users
-// http://www.punesubji.com/store/rest/products
 
 export const addState = ({commit}) => {
     // 使用QS获取数据
@@ -39,8 +30,6 @@ export const saveDeviceInfo = ({commit},Obj) => {
 export const getFurnitureInfo = ({commit}) => {
     // 本地数据
     axios.post('./static/furnitureInfo_1.json', {
-    // axios.post('http://192.168.1.30:8282/aoffice_app/api/es/getInvestigate?icode=ig0001' , {
-        // icode: 'ig0001'
     })
     .then(function (response) {
         let get_data = response.data.resultData

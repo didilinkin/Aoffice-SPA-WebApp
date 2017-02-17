@@ -17,22 +17,18 @@ export default {
     ,methods: {
         // 目的: 状态清空
         firstLoading() {
-            // 给 $store的 openMapNum : + 1
-            this.initOpenMapNum()
+            this.initOpenMapNum()                                           // 给 $store的 openMapNum : + 1
             // 开始判断 '打开次数'
             let openMapNum = this.$store.state.map.mapState.openMapNum.length
             console.log( openMapNum )
             switch( true ) {
                 case openMapNum < 2:
-                    // 初次加载
-                    this.determineRequest( true )
+                    this.determineRequest( true )                           // 初次加载
                     break
-                case openMapNum > 1 && openMapNum < 20:
-                    // 非初次加载
+                case openMapNum > 1 && openMapNum < 20:                     // 非初次加载
                     this.determineRequest( false )
                     break
-                default:
-                    // 当切换次数大于20次. 重置状态 和 参数
+                default:                                                    // 当切换次数大于20次. 重置状态 和 参数
                     this.resetState()
                     this.determineRequest( true )
                     break
@@ -47,6 +43,7 @@ export default {
         // 目的: 判断发起交互的接口
         ,determineRequest( initResult ) {
             // 保存所有需要的状态
+            let cityCode = this.$store.state.map.searchParameter.cityCode
 
             if( initResult == true ) {
                 // 获取初始化的结果事件( 不需要判断层级 )

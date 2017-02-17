@@ -88,7 +88,7 @@ const state = {
     ,map: {
         // 检索参数
         searchParameter: {
-            cityCode                : ''                    // 城市Code
+            cityCode                : '3702'                // 城市Code
             ,regionCode             : ''                    // 行政区Code
             ,businessCircleCode     : ''                    // 商圈Code
             ,bType                  : ''                    // 检索类型( 必选 )
