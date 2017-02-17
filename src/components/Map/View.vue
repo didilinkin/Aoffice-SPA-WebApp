@@ -142,11 +142,12 @@ export default {
             // 覆盖物描述方法 - ( '行政区' + '商圈' )
             let addRangeOverlay = ( ObjGroup, setZoom ) => {
                 // 方法声明
-                let rangeOverlay = ( point, text, code, zoom ) => {
+                let rangeOverlay = function( point, text, code, zoom ) {
                     this._point = point
                     this._text  = text
                     this._code  = code
                     this._zoom  = zoom
+                    // console.dir( this._point.lat )
                 }
                 rangeOverlay.prototype = new BMap.Overlay()
                 rangeOverlay.prototype.initialize = function( map ) {
@@ -154,7 +155,7 @@ export default {
                     let div = this._div = document.createElement("div")
                     div.setAttribute("id",this._code)
                     div.setAttribute("class","range-overlay--big")
-                    div.style.zIndex = BMap.Overlay.getZIndex(this._point.lat)
+                    div.style.zIndex = BMap.Overlay.getZIndex( this._point.lat )
                     // 保存code
                     let code    = this._code                //　区域代码
                         ,point  = this._point
@@ -178,6 +179,9 @@ export default {
                 }
                 rangeOverlay.prototype.draw = function() {
                     let map = this._map
+                    let pointA = {}
+                        pointA.lat = this._point.lng
+                        pointA.lng = this._point.lat
                     // 我也不知道为什么 需要兑换一下数值才可以输出( 如果不换,坐标会统一到西非那里.. )
                     let pixel = map.pointToOverlayPixel(pointA)
                     this._div.style.left = pixel.x - 40 + "px"
@@ -234,6 +238,7 @@ export default {
         ,getResultNum: function() {
             // 返回结果成功 -> 渲染地图( 重置覆盖物 )
             this.resetOverlay()   // 重置覆盖物( 描述覆盖物方法 )
+            // console.log(' 返回结果 ')
         }
         // 监听: 页面打开次数 - 初始化地图
         ,getOpenMapNum: function() {
