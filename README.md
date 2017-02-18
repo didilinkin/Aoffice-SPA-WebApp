@@ -128,7 +128,7 @@ App.vue ( 根节点 )
     - [ ] 优化Vuex的state结构; 分模块存放状态数据
     - [ ] 后台返回当前城市的中心坐标点或者字符串城市名称,然后放置到state当中储存。 在'地图'页面内进行渲染中心点
     - [ ] 想办法将地图渲染事件设为全局事件, 避免每次更改检索条件都要重新刷新页面
-
+    - [ ] '地图' 模块的状态管理必须在`$store`中管理( 跨组件操作 ), 但是需要优化`actions`模块
 ***
 
 ## 命名约定
@@ -153,3 +153,26 @@ App.vue ( 根节点 )
 1. 变量名 / 方法名 开头需小写
 2. 使用驼峰命名法( 避免使用 破折号 / 下划线 连接两个单词 )
 
+***
+
+#### 测试MD 流程图
+
+```flow
+st=>start: Start
+e=>end: End
+op1=>operation: My Operation
+sub1=>subroutine: My Subroutine
+cond=>condition: Yes or No?
+io=>inputoutput: catch something...
+st->op1->cond
+cond(yes)->io->e
+cond(no)->sub1(right)->op1
+```
+
+#### 测试MD 时序图
+
+```sequence
+Alice->Bob: Hello Bob, how are you?
+Note right of Bob: Bob thinks
+Bob-->Alice: I am good thanks!
+```

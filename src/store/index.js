@@ -74,7 +74,7 @@ const state = {
             zoomNum                 : '11'                  // 地图当前层级( 具体数值 )
             ,indexLevel             : 'administrative'      // 行政区: administrative; 商圈: business; 具体: building
             ,openMapNum             : []                    // 记录 '地图' 页面打开次数 - 判断初始化
-            ,changeIndexLevelNum    : []                    // 记录 '地图' 层级改变次数 - 判断事件是否改变层级
+            ,changeZoomNum          : []                    // 记录 '地图' 层级改变次数 - 当层级改变 -> 触发新参数检索( 先保存层级, 然后触发不同接口的请求 )
             ,requestNum             : []                    // 记录 '地图' 发起检索事件次数 - 回调判断检索事件内容( 需监听 )
             ,resultNum              : []                    // 记录返回结果 次数( 需监听 )
         }

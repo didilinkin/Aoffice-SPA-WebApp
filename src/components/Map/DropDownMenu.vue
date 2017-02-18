@@ -49,16 +49,22 @@ export default {
     }
     ,methods: {
         changeBType( value ) {                                                              // 目的: 改变检索类型
-            this.showDayPrice = !this.showDayPrice
-            this.bType = value
-            if( value == 1 ){
-                let parameterObj = new Object
-                parameterObj.bType = 'A'
-                this.saveParameter( parameterObj )
-            }else{
-                let parameterObj = new Object
-                parameterObj.bType = 'B'
-                this.saveParameter( parameterObj )
+            switch( value ) {                                                               // 判断选择值是否与 $data保存的值相同( 如果相同, 不执行操作 )
+                case this.bType:
+                    break                                                                   // 值相同, 不执行操作
+                default:
+                    this.showDayPrice = !this.showDayPrice                                  // 值不相同, 执行操作
+                    this.bType = value
+                    if( value == 1 ){
+                        let parameterObj = new Object
+                        parameterObj.bType = 'A'
+                        this.saveParameter( parameterObj )
+                    }else{
+                        let parameterObj = new Object
+                        parameterObj.bType = 'B'
+                        this.saveParameter( parameterObj )
+                    }
+                    break
             }
         }
         ,changeDayPrice( value ) {                                                          // 目的: 改变日价格区间

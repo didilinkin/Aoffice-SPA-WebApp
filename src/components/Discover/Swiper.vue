@@ -59,7 +59,5 @@ export default {
     -webkit-align-items: center
     align-items: center
     img.bannerImg
-        /*+REM(width,360px)*/
         width: 100%
-
 </style>

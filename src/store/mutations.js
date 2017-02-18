@@ -365,7 +365,7 @@ export const resetMapState = ( state ) => {
     state.map.mapState.zoomNum                      = '11'
     state.map.mapState.indexLevel                   = 'administrative'
     state.map.mapState.openMapNum                   = []
-    state.map.mapState.changeIndexLevelNum          = []
+    state.map.mapState.changeZoomNum                = []
     state.map.mapState.requestNum                   = []
     state.map.mapState.resultNum                    = []
     // 地图返回结果数组 - 重置
@@ -381,4 +381,15 @@ export const saveResult = ( state, res ) => {
     // $store保存 返回结果成功( 计数, 触发View层数据改变 )
     let null_Obj = {}                                                                                                       // 创建一个空对象
     state.map.mapState.resultNum.push(null_Obj)
+}
+
+// 地图改变层级: 层级后, 更改 $store状态( 触发改变层级计数 )
+export const saveIndexLevelState = ( state, res ) => {
+    let attrNameArr = Object.keys( res )
+    for( let i = 0; i < attrNameArr.length; i++ ) {
+        state.map.mapState[ attrNameArr[i] ] = res[attrNameArr[i]]   // 保存( 属性名 + 属性值 ) $store内的检索条件
+    }
+    // $store保存 层级状态成功( 计数, 触发View重新检索事件 )
+    let null_Obj = {}                                                                                                       // 创建一个空对象
+    state.map.mapState.changeZoomNum.push(null_Obj)
 }

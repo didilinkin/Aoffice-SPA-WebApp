@@ -285,9 +285,6 @@ export const setBuildingNum = ({commit}) => {
 
 // 改变全局 '锁'状态管理中 - '房源'页 - 右侧抽屉 - 状态
 export const setHouseResourceDrawer = ({commit}, Obj ) => {
-    // console.log( Obj.openState )
-    // console.log( Obj.dockedState )
-    // console.log( Obj )
     commit('addHouseResourceDrawer', Obj)
 }
 
@@ -369,4 +366,9 @@ export const getBuildingResult = ( { commit }, Obj ) => {
     .catch(function (error) {
         console.log(error)
     });
+}
+
+// 地图改变层级: 层级后, 更改 $store状态( 触发改变层级计数 )
+export const changeIndexLevel = ( { commit }, Obj ) => {
+    commit('saveIndexLevelState', Obj)               // 保存层级状态
 }
