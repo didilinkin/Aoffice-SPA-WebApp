@@ -1,6 +1,6 @@
 <!-- "地图"页面 - 百度地图视图组件( 接收经过筛选后的表现数据 ) -->
-<template>
-    <div id="mapView"></div>
+<template lang="pug">
+    #mapView
 </template>
 
 <script>

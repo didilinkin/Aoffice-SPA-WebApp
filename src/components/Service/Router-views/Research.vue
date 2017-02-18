@@ -1,7 +1,7 @@
-<template>
-    <div id="Service_Research">
-        <Research_scrollList />
-    </div>
+<!--  外出考察  -->
+<template lang="pug">
+    #Service_Research
+        Research_scrollList
 </template>
 <script>
 import      Research_scrollList       from    '../Research/Research_scrollList.vue'

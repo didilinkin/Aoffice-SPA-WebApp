@@ -1,24 +1,20 @@
-<template>
-    <!-- Swiper -->
-    <div class="swiper-container">
-        <div class="swiper-wrapper">
-            <!-- 循环图片列表 -->
-            <div class="swiper-slide" v-for="item in swiper_arr">
-                <img :src="item.imgUrl" class="bannerImg">
-            </div>
-        </div>
-        <!-- Add Pagination -->
-        <div class="swiper-pagination"></div>
-    </div>
+<template lang="pug">
+    .swiper-container
+        .swiper-wrapper
+            .swiper-slide( v-for="item in swiper_arr" )
+                img.bannerImg( :src="item.imgUrl" )
+        .swiper-pagination
 </template>
 
 <script>
 import Swiper from '../../assets/script/swiper.min.js'
 export default {
-    props: [ 'swiper_arr' ],
+    props: [ 'swiper_arr' ]
     // Banner
-    mounted: function () { this.carousel() },
-    methods: {
+    ,mounted: function () {
+        this.carousel()
+    }
+    ,methods: {
         carousel: function () {
             setTimeout(() => {
                 const swiper = new Swiper('.swiper-container', {
@@ -30,7 +26,7 @@ export default {
                     centeredSlides: true,
                     autoplay: 2500,
                     autoplayDisableOnInteraction: false
-                });
+                })
             }, 100)
         }
     }

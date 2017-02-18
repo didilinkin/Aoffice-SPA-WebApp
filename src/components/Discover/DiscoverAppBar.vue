@@ -10,12 +10,12 @@
         <!-- 隐藏左侧 -->
         <mu-drawer :open="open" :docked="docked" class="left--box" @close="toggle()">
             <mu-list @itemClick="docked ? '' : toggle()">
-                <mu-list-item title="新功能介绍" @click="toAboutInfo( 'newFeatures' )" />                             <!-- NewFeatures -->
-                <mu-list-item title="常见问题"   @click="toAboutInfo( 'FAQ' )" />                                     <!-- FAQ -->
-                <mu-list-item title="关于我们"   @click="toAboutInfo( 'aboutUs' )" />                                 <!-- AboutUs -->
-                <mu-list-item title="商务合作"   @click="toAboutInfo( 'cooperation' )" />                             <!-- Cooperation -->
-                <mu-list-item title="隐私政策"   @click="toAboutInfo( 'privacyPolicy' )" />                           <!-- PrivacyPolicy -->
-                <mu-list-item title="版权信息"   @click="toAboutInfo( 'copyrightInfo' )" />                           <!-- CopyrightInfo -->
+                <mu-list-item title="新功能介绍" @click="toAboutInfo( 'newFeatures' )" />
+                <mu-list-item title="常见问题"   @click="toAboutInfo( 'FAQ' )" />
+                <mu-list-item title="关于我们"   @click="toAboutInfo( 'aboutUs' )" />
+                <mu-list-item title="商务合作"   @click="toAboutInfo( 'cooperation' )" />
+                <mu-list-item title="隐私政策"   @click="toAboutInfo( 'privacyPolicy' )" />
+                <mu-list-item title="版权信息"   @click="toAboutInfo( 'copyrightInfo' )" />
             </mu-list>
         </mu-drawer>
     </mu-appbar>
