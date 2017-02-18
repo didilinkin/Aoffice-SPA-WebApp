@@ -278,6 +278,10 @@ export const setHouseListBType = ({commit},Obj) => {
         console.log(error)
     });
 }
+// 改变数组时, 修改计数值
+export const setBuildingNum = ({commit}) => {
+    commit('addBuildingNum')
+}
 
 // 改变全局 '锁'状态管理中 - '房源'页 - 右侧抽屉 - 状态
 export const setHouseResourceDrawer = ({commit}, Obj ) => {

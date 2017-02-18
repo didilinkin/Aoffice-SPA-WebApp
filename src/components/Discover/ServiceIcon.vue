@@ -124,6 +124,7 @@ export default {
             >div
                 margin: 0 auto
                 +REM(width, 60px)
+                +REM(height, 60px)
                 +radiusSize( 50% )
                 +bC( rgba( $badgeFont-color, .2 ) )
                 >img
