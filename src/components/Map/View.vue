@@ -8,9 +8,9 @@ import  { mapActions, mapGetters }  from    'vuex'
 export default {
     data() {
         return {
-            baiduMap        : {}                                                            // 存储: 'miniMap'对象
-            ,resultArr      : []                                                            // 存储: 返回结果的数组
-            ,indexLevelNum  : ''                                                            // 存储: '地图'级别( 用于比较放大缩小事件 )
+            baiduMap        : {}                                                                                                // 存储: 'miniMap'对象
+            ,resultArr      : []                                                                                                // 存储: 返回结果的数组
+            ,indexLevelNum  : ''                                                                                                // 存储: '地图'级别( 用于比较放大缩小事件 )
         }
     }
     ,mounted: function() {
@@ -19,17 +19,17 @@ export default {
     ,methods: {
         // 目的: 状态清空
         firstLoading() {
-            this.initOpenMapNum()                                                           // 给 $store的 openMapNum : + 1
+            this.initOpenMapNum()                                                                                               // 给 $store的 openMapNum : + 1
             // 开始判断 '打开次数'
             let openMapNum = this.$store.state.map.mapState.openMapNum.length
             switch( true ) {
                 case openMapNum < 2:
-                    this.interfaceRequest()                                                 // 初次加载
+                    this.interfaceRequest()                                                                                     // 初次加载
                     break
-                case openMapNum > 1 && openMapNum < 20:                                     // 页面打开加载次数未超过限制( 直接检索 )
+                case openMapNum > 1 && openMapNum < 20:                                                                         // 页面打开加载次数未超过限制( 直接检索 )
                     this.interfaceRequest()
                     break
-                default:                                                                    // 当切换次数大于20次, 重置状态 和 参数 -> 然后发起请求
+                default:                                                                                                        // 当切换次数大于20次, 重置状态 和 参数 -> 然后发起请求
                     this.resetState()
                     this.interfaceRequest()
                     break
@@ -41,9 +41,9 @@ export default {
             let city_Longitude  = this.$store.state.city.cityLongitude
                 ,city_Latitude  = this.$store.state.city.cityLatitude
                 ,zoomNum        = this.$store.state.map.mapState.zoomNum
-            const miniMap       = new BMap.Map("mapView", {enableMapClick:false})           //关闭底图可点功能
+            const miniMap       = new BMap.Map("mapView", {enableMapClick:false})                                               //关闭底图可点功能
             const miniMapPoint  = new BMap.Point( city_Longitude, city_Latitude)
-            miniMap.centerAndZoom(miniMapPoint, zoomNum)                                    // 层级
+            miniMap.centerAndZoom(miniMapPoint, zoomNum)                                                                        // 层级
             miniMap.addControl(new BMap.NavigationControl({
                 anchor: BMAP_ANCHOR_TOP_RIGHT
                 ,type: BMAP_NAVIGATION_CONTROL_SMALL
@@ -52,7 +52,7 @@ export default {
             miniMap.addEventListener("zoomend", function() {
                 // 先保存到变量, 然后赋值到 $data中
                 let indexLevelNum
-                indexLevelNum = miniMap.getZoom()                                           // 保存当前层级到一个变量中
+                indexLevelNum = miniMap.getZoom()                                                                               // 保存当前层级到一个变量中
                 // 开始判断
                 if ( indexLevelNum >= 15 ) {
                     // 输出3级地图内容:详细覆盖
@@ -68,12 +68,12 @@ export default {
                     changeThisScope( indexLevelNum, 'administrative' )
                 }
                 // 将内部变量存储到 $data中
-                this.indexLevelNum = indexLevelNum                                          // 成功
+                this.indexLevelNum = indexLevelNum                                                                              // 成功
             })
-            let changeThisScope = ( indexLevelNum, indexLevel ) => {                        // 改变作用域( this == baiduMap ), 触发组件内的事件
+            let changeThisScope = ( indexLevelNum, indexLevel ) => {                                                            // 改变作用域( this == baiduMap ), 触发组件内的事件
                 this.changeIndexLevel( indexLevelNum, indexLevel )
             }
-            this.$data.baiduMap = miniMap                                                   // 将miniMap保存到 $data中, 让其他事件使用这个方法
+            this.$data.baiduMap = miniMap                                                                                       // 将miniMap保存到 $data中, 让其他事件使用这个方法
         }
         // 目的: 当地图层级改变之后, 更改 $store状态( 触发改变层级计数 )
         ,changeIndexLevel( indexLevelNum, indexLevel ) {
@@ -146,13 +146,13 @@ export default {
             // 判断层级( 包括初始化 ) -> 整理参数
             switch( indexLevelState ) {
                 case 'administrative':
-                    getAdministrativeResult()                                               // 行政区接口
+                    getAdministrativeResult()                                                                                   // 行政区接口
                     break
                 case 'business':
-                    getBusinessResult()                                                     // 商圈接口
+                    getBusinessResult()                                                                                         // 商圈接口
                     break
                 default:
-                    getBuildingResult()                                                     // 具体接口
+                    getBuildingResult()                                                                                         // 具体接口
                     break
             }
         }
@@ -188,12 +188,12 @@ export default {
                     div.setAttribute("class","range-overlay--big")
                     div.style.zIndex = BMap.Overlay.getZIndex( this._point.lat )
                     // 保存code
-                    let code    = this._code                                                //　区域代码
+                    let code    = this._code                                                                                    //　区域代码
                         ,point  = this._point
                         ,zoom   = this._zoom
                     div.onclick = function businessCirclePoint() {
                         // Ajax上传code，并改变中心点
-                        map.setZoom(zoom)                                                   // 根据坐标点进行跳转,改变层级
+                        map.setZoom(zoom)                                                                                       // 根据坐标点进行跳转,改变层级
                         // console.log("跳转链接" + url)
                     }
                     let span = this._span = document.createElement("span")
@@ -218,13 +218,12 @@ export default {
                     this._div.style.left = pixel.x - 40 + "px"
                     this._div.style.top  = pixel.y - 40 + "px"
                 }
-
                 // 渲染覆盖物( 调用 )
                 for( let i = 0; i < ObjGroup.length; i++ ) {
                     let arr     = new Object()
                         arr     = ObjGroup[i]
                     let code    = arr.code
-                        ,text   = arr.name + "<br />" + arr.resourceAmount + "套"            // 拼接字符串
+                        ,text   = arr.name + "<br />" + arr.resourceAmount + "套"                                                // 拼接字符串
                         ,zoom   = setZoom
                     let RangeOverlay = new rangeOverlay(
                         new BMap.Point( arr.latitude, arr.longitude ), text, code, zoom
@@ -234,7 +233,24 @@ export default {
             }
             // 覆盖物描述方法 - ( '具体' )
             let addBuilding = ( ObjGroup, setZoom ) => {
-
+                // 写字楼覆盖物方法 —— 3级使用
+                let addBuildingOverlay = ( longitude, latitude, code, zoom ) => {
+                    // 信息自定义标识
+                    let pointImg_Obj    = require('../../assets/images/map_select_postion_copy.png')                            // 通过webpack引入图片对象
+                    let building_Icon   = new BMap.Icon( pointImg_Obj, new BMap.Size( 40, 40 ) )                                // 自定义标注样式( 加入前面图片对象 )
+                    let building_Marker = new BMap.Marker( new BMap.Point(longitude,latitude), { icon: building_Icon} )         // 创建信息自定义标识(将样式加入)
+                    baiduMap.addOverlay( building_Marker )                                                                      // 添加建筑物 坐标覆盖物
+                }
+                // 遍历返回的具体写字楼结果 数组
+                for( let i = 0; i < ObjGroup.length; i++ ) {
+                    let buildingArr  = new Object()
+                        buildingArr  = ObjGroup[i]
+                    // 办公楼 详细数据 保存变量
+                    let code    = buildingArr.code                                                                              // 保存code, 用于跳转页面
+                        ,imgUrl = buildingArr.imgUrl                                                                            // 保存图片地址, 点击自定义覆盖物 弹出框内图片
+                        ,zoom   = setZoom
+                    addBuildingOverlay( buildingArr.longitude, buildingArr.latitude, code, zoom )                               // 执行添加坐标覆盖物事件
+                }
             }
             // 当层级小于12时 -> 修正样式( 缩小覆盖物面积 )
             let zoomOutOverlay = () => {
@@ -246,12 +262,12 @@ export default {
             // 清楚当前地图上的覆盖物( 先行执行, 覆盖物描绘方法在其后面执行 )
             baiduMap.clearOverlays()
             // 判断当前层级 -> 渲染渲染覆盖物方法
-            if( zoomState < 12 ) {                                                          // 1.2覆盖物 -> 缩小覆盖物
+            if( zoomState < 13 ) {                                                                                              // 1.2覆盖物 -> 缩小覆盖物
                 addRangeOverlay( resultArr, zoomState )
                 zoomOutOverlay()
-            } else if ( zoomState >= 12 && zoomState < 15 ) {                               // 1.2覆盖物
+            } else if ( zoomState >= 13 && zoomState < 15 ) {                                                                   // 1.2覆盖物
                 addRangeOverlay( resultArr, zoomState )
-            } else {                                                                        // 3覆盖物
+            } else {                                                                                                            // 3覆盖物
                 addBuilding( resultArr, zoomState )
             }
         }
@@ -267,11 +283,11 @@ export default {
     ,watch: {
         // 监听: 请求次数( 下拉菜单 + 地图点击触发事件 ) —— 整理参数 发起请求
         getRequestNum: function() {
-            this.interfaceRequest()                                                         // 发起检索请求
+            this.interfaceRequest()                                                                                             // 发起检索请求
         }
         // 监听: 接口返回结果次数 - 修改View页面数据
         ,getResultNum: function() {
-            this.resetOverlay()                                                             // 返回结果成功 -> 重置覆盖物( 描述覆盖物方法 )
+            this.resetOverlay()                                                                                                 // 返回结果成功 -> 重置覆盖物( 描述覆盖物方法 )
         }
         // 监听: 页面打开次数 -> 初始化地图
         ,getOpenMapNum: function() {

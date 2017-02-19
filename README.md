@@ -1,20 +1,21 @@
 # A+office-SPA-WebApp
 
-> 本页面需要在服务器环境下通过域名访问,勿直接浏览静态页面
+> 本页面需要在服务器环境下访问( 可使用 `yarn run dev` 预览 ), 勿直接浏览静态页面
 
 ### 使用技术:
-| 技术名称                                           | 作用           |  版本  |
-| --------                                          | -----:         | :----:  |
-| Vuejs                                             | 框架            |   2.1.10     |
-| Vuex                                              | 状态管理        |   2.1.1   |
-| Vue-router                                        | 路由管理        |  2.1.3  |
-| Axios                                             | 交互处理        |  0.15.3  |
-| Sass (node-sass)                                  | 样式预处理器     |  4.1.1  |
-| Webpack                                           | 模块打包         |  1.13.2  |
-| Gulp                                              | 自动构建工具     |  3.9.1  |
-| Babel                                             | ES6转译ES5      |  6.0.0  |
-| Yarn                                              | 模块依赖安装     |  0.17.6  |
-| [Muse UI](https://museui.github.io/#/index)       | UI框架          |  2.0.0-rc.5  |
+| 技术名称                                                      | 作用           |  版本  |
+| --------                                                      | -----:         | :----:  |
+| [Vuejs](http://cn.vuejs.org/)                                 | 框架            |   2.1.10     |
+| Vuex                                                          | 状态管理        |   2.1.1   |
+| Vue-router                                                    | 路由管理        |  2.1.3  |
+| Axios                                                         | 交互处理        |  0.15.3  |
+| Sass                                                          | 样式预处理器     |  4.1.1  |
+| Webpack                                                       | 模块打包         |  1.13.2  |
+| Gulp                                                          | 自动构建工具     |  3.9.1  |
+| Babel                                                         | ES6转译ES5      |  6.0.0  |
+| Yarn                                                          | 模块依赖安装     |  0.17.6  |
+| [Muse UI](https://museui.github.io/#/index)                   | UI框架          |  2.0.0-rc.5  |
+| [Pug](https://pugjs.org/zh-cn/api/getting-started.html)       | Node模版语言    |  2.0.0-beta11  |
 
 ## Build Setup / 开发流程
 
@@ -22,16 +23,19 @@
 # install dependencies/拉取项目,在项目路径下执行
 # 国内环境建议使用cnpm install
 npm install
+cnpm install
 
 # *推荐Yarn
 yarn install
 
 # serve with hot reload at localhost:8080
 # npm安装依赖后,运行node服务器,打开 localhost:80 预览 (已运行热更新功能)
+yarn run dev
 npm run dev
 
 # build for production with minification
 # 当修改代码后,需要手动打包发布时,运行npm run build命令进行打包
+yarn run build
 npm run build
 ```
 ## API docs / 接口文档
@@ -153,26 +157,3 @@ App.vue ( 根节点 )
 1. 变量名 / 方法名 开头需小写
 2. 使用驼峰命名法( 避免使用 破折号 / 下划线 连接两个单词 )
 
-***
-
-#### 测试MD 流程图
-
-```flow
-st=>start: Start
-e=>end: End
-op1=>operation: My Operation
-sub1=>subroutine: My Subroutine
-cond=>condition: Yes or No?
-io=>inputoutput: catch something...
-st->op1->cond
-cond(yes)->io->e
-cond(no)->sub1(right)->op1
-```
-
-#### 测试MD 时序图
-
-```sequence
-Alice->Bob: Hello Bob, how are you?
-Note right of Bob: Bob thinks
-Bob-->Alice: I am good thanks!
-```
