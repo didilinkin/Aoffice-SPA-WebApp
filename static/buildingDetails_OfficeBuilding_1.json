@@ -1,0 +1,208 @@
+{
+    "resultCode": 1,
+    "resultMsg": "楼盘详情加载成功",
+    "resultData": {
+        "picUrl": "http://images.aplusoffice.cn/",
+        "typeASearch": [
+            {}
+        ],
+        "typeBSearch": [
+            {}
+        ],
+        "status12Search": [
+            {
+                "code": "R000000080",
+                "type": "C",
+                "area": 94.82,
+                "floor": 25,
+                "remark": "此处为备注",
+                "priceSale": null,
+                "priceMonth": 7965,
+                "priceDay": 2.8,
+                "appPic": "images/building2/B000000016/real/real4.jpg",
+                "decoration": "C",
+                "status": "1",
+                "amount": 1,
+                "seatCount": null,
+                "isSave": false,
+                "appBuilding": null,
+                "buildingType": null,
+                "buildingName": null,
+                "decorationStr": "简装",
+                "floorStr": "高层",
+                "statusStr": "待租",
+                "areaStr": "94.82"
+            },
+            {
+                "code": "R000000080",
+                "type": "C",
+                "area": 94.82,
+                "floor": 25,
+                "remark": "此处为备注",
+                "priceSale": null,
+                "priceMonth": 7965,
+                "priceDay": 2.8,
+                "appPic": null,
+                "decoration": "C",
+                "status": "1",
+                "amount": 2,
+                "seatCount": null,
+                "isSave": false,
+                "appBuilding": null,
+                "buildingType": null,
+                "buildingName": null,
+                "decorationStr": "简装",
+                "floorStr": "高层",
+                "statusStr": "待租",
+                "areaStr": "94.82"
+            }
+        ],
+        "status3Search": [
+            {
+                "code": "R000000080",
+                "type": "D",
+                "area": 94.82,
+                "floor": 25,
+                "remark": "此处为备注",
+                "priceSale": 111,
+                "priceMonth": 7965,
+                "priceDay": 2.8,
+                "appPic": "images/building2/B000000016/real/real1.jpg",
+                "decoration": "C",
+                "status": "1",
+                "amount": 1,
+                "seatCount": null,
+                "isSave": false,
+                "appBuilding": null,
+                "buildingType": null,
+                "buildingName": null,
+                "decorationStr": "简装",
+                "floorStr": "高层",
+                "statusStr": "待售",
+                "areaStr": "94.82"
+            },
+            {
+                "code": "R000000080",
+                "type": "D",
+                "area": 94.82,
+                "floor": 25,
+                "remark": "此处为备注",
+                "priceSale": 222,
+                "priceMonth": 7965,
+                "priceDay": 2.8,
+                "appPic": "images/building2/B000000016/real/real1.jpg",
+                "decoration": "C",
+                "status": "1",
+                "amount": 1,
+                "seatCount": null,
+                "isSave": false,
+                "appBuilding": null,
+                "buildingType": null,
+                "buildingName": null,
+                "decorationStr": "简装",
+                "floorStr": "高层",
+                "statusStr": "待售",
+                "areaStr": "94.82"
+            },
+            {
+                "code": "R000000080",
+                "type": "D",
+                "area": 94.82,
+                "floor": 25,
+                "remark": "此处为备注",
+                "priceSale": 333,
+                "priceMonth": 7965,
+                "priceDay": 2.8,
+                "appPic": "",
+                "decoration": "C",
+                "status": "1",
+                "amount": 1,
+                "seatCount": null,
+                "isSave": false,
+                "appBuilding": null,
+                "buildingType": null,
+                "buildingName": null,
+                "decorationStr": "简装",
+                "floorStr": "高层",
+                "statusStr": "待售",
+                "areaStr": "94.82"
+            },
+            {
+                "code": "R000000080",
+                "type": "D",
+                "area": 94.82,
+                "floor": 25,
+                "remark": "此处为备注",
+                "priceSale": 444,
+                "priceMonth": 7965,
+                "priceDay": 2.8,
+                "appPic": "images/building2/B000000016/real/real1.jpg",
+                "decoration": "C",
+                "status": "1",
+                "amount": 1,
+                "seatCount": null,
+                "isSave": false,
+                "appBuilding": null,
+                "buildingType": null,
+                "buildingName": null,
+                "decorationStr": "简装",
+                "floorStr": "高层",
+                "statusStr": "待售",
+                "areaStr": "94.82"
+            }
+        ],
+        "buildingRelationList": [
+            {
+                "code": "B000000008",
+                "name": "长江中心A座",
+                "type": "A",
+                "subTitle": "因为向往大海，所以汇入长江",
+                "appListUrl": "images/app/building2/B000000008/list/app_list_url.jpg",
+                "description": "长江中心位于人杰地灵的青岛西海岸，是岛城首座高层钢结构商务写字楼，也是开发区目前最高级别的5A甲级写字楼，成为开发区CBD长江路上的标志性代表建筑。\r长江中心总建筑面积54000平方米，由主楼和裙楼两部分组成，其中地下2层为停车场可容纳386个车位。主楼28层，以写字楼为主，主楼一楼大堂及2、3层规划建设有高级餐厅、咖啡厅、票务及商务中心等商务配套服务，更特别设计多个多功能会议厅及仅开放给楼内企业的大小不同规模的会议室，为入驻企业提供360°国际化全面商务支持。裙楼5层，招商银行业已进驻，还有大型餐饮休闲企业，为整个CBD提供全面高端的金融、餐饮、娱乐服务。"
+            }
+        ],
+        "buildingPicList": [
+            {
+                "realAppUrl": "images/building2/B000000016/real/real10.jpg"
+            },
+            {
+                "realAppUrl": "images/building2/B000000016/real/real2.jpg"
+            },
+            {
+                "realAppUrl": "images/building2/B000000016/real/real3.jpg"
+            },
+            {
+                "realAppUrl": "images/building2/B000000016/real/real4.jpg"
+            },
+            {
+                "realAppUrl": "images/building2/B000000016/real/real5.jpg"
+            },
+            {
+                "realAppUrl": "images/building2/B000000016/real/real1.jpg"
+            }
+        ],
+        "buildingDetails": {
+            "code": "B000000016",
+            "name": "欢乐颂创意办公空间",
+            "type": "B",
+            "address": "开发区，长江中路517号",
+            "description": "欢乐颂创意办公空间配备专业秘书接受入住客户的呼叫服务，提供打印/复印服务、会务服务、接送服务、商务/法务服务、财税服务、安保服务、管理咨询等个性化一站式服务，灵动满足个性需求，达成“有限空间,无限链接”的事业愿景。",
+            "propertyCompany": "长江物业；管理费：7元/平米/月",
+            "floorHeight": "净高2.6m",
+            "parkingNum": "地下车位数：500个",
+            "longitude": 120.188076,
+            "latitude": 35.9578795,
+            "areaMin": 1,
+            "areaMax": 165,
+            "priceMonthMin": null,
+            "priceDayMin": 3,
+            "priceDayMax": 23.33,
+            "parentCode": "B000000008",
+            "amountA": 0,
+            "amountB": 40,
+            "city": "青岛市",
+            "reg": "开发区",
+            "road": "长江中路517号"
+        }
+    }
+}

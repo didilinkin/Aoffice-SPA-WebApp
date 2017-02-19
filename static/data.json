@@ -1,5 +1,5 @@
 {
-    "bannerImg": [
+    "appTopImg": [
         { "imgUrl": "http://images.aplusoffice.cn/images/building/B000000019/list/pic_hotspot.jpg" },
         { "imgUrl": "http://images.aplusoffice.cn/images/building/B000000025/list/pic_hotspot.jpg" },
         { "imgUrl": "http://images.aplusoffice.cn/images/building/B000000037/list/pic_hotspot.jpg" },
@@ -8,7 +8,7 @@
     ],
     "hotBuildingList": [
         {
-            "code": "#",
+            "code": "B000000008",
             "type": "A",
             "name": "长江中心A座",
             "subTitle": "因为向往大海，所以汇入长江",
@@ -20,7 +20,7 @@
             "amount3": 20
         },
         {
-            "code": "#",
+            "code": "B000000008",
             "type": "B",
             "name": "欢乐颂创意办公空间",
             "subTitle": "市中心最大规模的国际化高端社区",
@@ -32,7 +32,7 @@
         },
 
         {
-            "code": "#",
+            "code": "B000000008",
             "type": "A",
             "name": "上实中心",
             "subTitle": "项目作为啤酒节的载体和青岛市的新地标",
@@ -44,7 +44,7 @@
             "amount3": 1
         },
         {
-            "code": "#",
+            "code": "B000000008",
             "type": "A",
             "name": "华润大厦",
             "subTitle": "市中心最大规模的国际化高端社区",
@@ -56,7 +56,7 @@
             "amount3": 75
         },
         {
-            "code": "#",
+            "code": "B000000008",
             "type": "B",
             "name": "万科中心",
             "subTitle": "市北新都心万科中心",
@@ -67,7 +67,7 @@
             "amountB": 41
         },
         {
-            "code": "#",
+            "code": "B000000008",
             "type": "A",
             "name": "东方影都",
             "subTitle": "影视产业基地",
@@ -79,7 +79,7 @@
             "amount3": 58
         },
         {
-            "code": "#",
+            "code": "B000000008",
             "type": "B",
             "name": "颐和国际",
             "subTitle": "高层商住公寓、写字楼",
