@@ -370,5 +370,10 @@ export const getBuildingResult = ( { commit }, Obj ) => {
 
 // 地图改变层级: 层级后, 更改 $store状态( 触发改变层级计数 )
 export const changeIndexLevel = ( { commit }, Obj ) => {
-    commit('saveIndexLevelState', Obj)               // 保存层级状态
+    commit('saveIndexLevelState', Obj)
+}
+
+// '地图' 覆盖物渲染完成次数
+export const overlayReady = ( { commit } ) => {
+    commit('saveOverlayReady')
 }

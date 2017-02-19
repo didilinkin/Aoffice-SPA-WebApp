@@ -368,6 +368,7 @@ export const resetMapState = ( state ) => {
     state.map.mapState.changeZoomNum                = []
     state.map.mapState.requestNum                   = []
     state.map.mapState.resultNum                    = []
+    state.map.mapState.overlayReadyNum              = []
     // 地图返回结果数组 - 重置
     state.map.resultArr                             = []
     // $store保存好 地图打开次数值
@@ -392,4 +393,10 @@ export const saveIndexLevelState = ( state, res ) => {
     // $store保存 层级状态成功( 计数, 触发View重新检索事件 )
     let null_Obj = {}                                                                                                       // 创建一个空对象
     state.map.mapState.changeZoomNum.push(null_Obj)
+}
+
+// '地图' 覆盖物渲染完成次数
+export const saveOverlayReady = ( state ) => {
+    let null_Obj = {}                                                                                                       // 创建一个空对象
+    state.map.mapState.overlayReadyNum.push(null_Obj)
 }

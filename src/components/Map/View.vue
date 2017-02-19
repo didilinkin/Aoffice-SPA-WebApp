@@ -11,6 +11,7 @@ export default {
             baiduMap        : {}                                                                                                // 存储: 'miniMap'对象
             ,resultArr      : []                                                                                                // 存储: 返回结果的数组
             ,indexLevelNum  : ''                                                                                                // 存储: '地图'级别( 用于比较放大缩小事件 )
+            ,overlayArr     : []                                                                                                // 存储: 描绘覆盖物时, 将覆盖物对象保存到此数组
         }
     }
     ,mounted: function() {
@@ -173,6 +174,12 @@ export default {
                 ,baiduMap           = this.$data.baiduMap
             // 覆盖物描述方法 - ( '行政区' + '商圈' )
             let addRangeOverlay = ( ObjGroup, setZoom ) => {
+                // 将每一个覆盖物保存到 $data中( rangeOverlay覆盖物对象丢出保存对象 )
+                let saveOverlayObj = ( params ) => {
+                    this.$data.overlayArr.push(params)
+                    // 先不保存 直接加入监听事件
+                    // params.addEventListener('click', alert() )
+                }
                 // 方法声明
                 let rangeOverlay = function( point, text, code, zoom ) {
                     this._point = point
@@ -184,18 +191,27 @@ export default {
                 rangeOverlay.prototype.initialize = function( map ) {
                     this._map = map
                     let div = this._div = document.createElement("div")
-                    div.setAttribute("id",this._code)
-                    div.setAttribute("class","range-overlay--big")
+                    div.setAttribute( "id", this._code )
+                    div.setAttribute( "class", "range-overlay--big" )
+                    // div.setAttribute( "onclick", "alert(1)" )
                     div.style.zIndex = BMap.Overlay.getZIndex( this._point.lat )
                     // 保存code
                     let code    = this._code                                                                                    //　区域代码
                         ,point  = this._point
                         ,zoom   = this._zoom
-                    div.onclick = function businessCirclePoint() {
-                        // Ajax上传code，并改变中心点
-                        map.setZoom(zoom)                                                                                       // 根据坐标点进行跳转,改变层级
-                        // console.log("跳转链接" + url)
+
+                    // addRangeOverlay.addEventListener()
+                    // this.addEventListener()
+                    // div.addEventListener( 'click', console.log('1111') )
+                    div.onclick = function(){
+                        alert( '点击事件' )
                     }
+
+                    // console.log( this )
+                    let overlayObj = div
+                    saveOverlayObj( overlayObj )
+
+
                     let span = this._span = document.createElement("span")
                     div.appendChild(span)
                     div.getElementsByTagName("span")[0].innerHTML =  this._text
@@ -265,10 +281,43 @@ export default {
             if( zoomState < 13 ) {                                                                                              // 1.2覆盖物 -> 缩小覆盖物
                 addRangeOverlay( resultArr, zoomState )
                 zoomOutOverlay()
+                // console.dir( this.$data.overlayArr )            // 将创造的覆盖物对象保存到一个数组当中
             } else if ( zoomState >= 13 && zoomState < 15 ) {                                                                   // 1.2覆盖物
                 addRangeOverlay( resultArr, zoomState )
+                // console.dir( this.$data.overlayArr )            // 将创造的覆盖物对象保存到一个数组当中
             } else {                                                                                                            // 3覆盖物
                 addBuilding( resultArr, zoomState )
+                // console.dir( this.$data.overlayArr )            // 将创造的覆盖物对象保存到一个数组当中
+            }
+            // 当覆盖物描述成功后, 向 $data内的overlayReadyArr数组加一
+            this.$store.dispatch({
+                type: 'overlayReady'
+            })
+        }
+        // 目的: 点击覆盖物触发的改变层级事件( 未使用 )
+        ,setZoom() {
+            console.log( '触发层级改变事件' )
+        }
+        // 目的: 当覆盖物完成渲染 -> 给覆盖物添加点击事件
+        ,addOverlayClickEvents() {
+            // console.dir( this.overlayArr ) // 将 $data 中的覆盖物数组遍历, 添加监听点击事件
+            let overlayArr = this.overlayArr
+            for( let i = 0; i < overlayArr.length; i++ ) {
+                let overlayObj = overlayArr[i]
+                // console.log( overlayObj )
+                // overlayObj.addEventListener('click',function(){
+                //     console.log( 'dianji' )
+                // })
+
+                // console.log( overlayObj )
+                // overlayObj.addEventListener('click',function(){
+                //     console.log( 'dianji' )
+                // })
+                // 2.
+                // overlayObj.click = function(){
+                //     console.log('1')
+                // }
+                // console.dir( overlayObj )
             }
         }
     }
@@ -279,6 +328,7 @@ export default {
         ,getOpenMapNum          : 'getOpenMapNum'
         ,getResultArr           : 'getResultArr'
         ,getChangeZoomNumArr    : 'getChangeZoomNumArr'
+        ,getOverlayReadyNum     : 'getOverlayReadyNum'
     })
     ,watch: {
         // 监听: 请求次数( 下拉菜单 + 地图点击触发事件 ) —— 整理参数 发起请求
@@ -296,6 +346,11 @@ export default {
         // 监听: 当层级改变时 -> 统一接口处理事件处理参数 -> 发起请求( 不需判断层级值, 因为是层级区间触发的改变层级事件 )
         ,getChangeZoomNumArr: function() {
             this.interfaceRequest()
+        }
+        // 监听: 当覆盖物渲染完成 -> 给覆盖物添加点击事件
+        ,getOverlayReadyNum: function() {
+            // console.log( '覆盖物描绘完成' )
+            this.addOverlayClickEvents()
         }
     }
 }

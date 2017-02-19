@@ -15,3 +15,4 @@ export const getResultNum               =   state   => state.map.mapState.result
 export const getOpenMapNum              =   state   => state.map.mapState.openMapNum                // '地图' - 打开View - 次数
 export const getResultArr               =   state   => state.map.resultArr                          // '地图' - 返回的结果数组
 export const getChangeZoomNumArr        =   state   => state.map.mapState.changeZoomNum             // '地图' - 改变层级状态数组
+export const getOverlayReadyNum         =   state   => state.map.mapState.overlayReadyNum           // '地图' - 渲染完成覆盖物 - 次数
