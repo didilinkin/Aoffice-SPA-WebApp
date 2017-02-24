@@ -193,7 +193,7 @@ export default {
                     let div = this._div = document.createElement("div")
                     div.setAttribute( "id", this._code )
                     div.setAttribute( "class", "range-overlay--big" )
-                    // div.setAttribute( "onclick", "alert(1)" )
+                    // div.setAttribute( "click", "alert(1)" )
                     div.style.zIndex = BMap.Overlay.getZIndex( this._point.lat )
                     // 保存code
                     let code    = this._code                                                                                    //　区域代码
@@ -206,12 +206,9 @@ export default {
                     div.onclick = function(){
                         alert( '点击事件' )
                     }
-
                     // console.log( this )
                     let overlayObj = div
                     saveOverlayObj( overlayObj )
-
-
                     let span = this._span = document.createElement("span")
                     div.appendChild(span)
                     div.getElementsByTagName("span")[0].innerHTML =  this._text
@@ -222,6 +219,10 @@ export default {
                         this.style.zIndex = "1"
                     }
                     map.getPanes().labelPane.appendChild(div)
+
+                    div.addEventListener('click',function(  ){
+                        console.log( '点击圆形覆盖物' )
+                    })
                     return div
                 }
                 rangeOverlay.prototype.draw = function() {
@@ -245,7 +246,11 @@ export default {
                         new BMap.Point( arr.latitude, arr.longitude ), text, code, zoom
                     )
                     baiduMap.addOverlay( RangeOverlay )
+
+
                 }
+
+
             }
             // 覆盖物描述方法 - ( '具体' )
             let addBuilding = ( ObjGroup, setZoom ) => {
@@ -255,7 +260,22 @@ export default {
                     let pointImg_Obj    = require('../../assets/images/map_select_postion_copy.png')                            // 通过webpack引入图片对象
                     let building_Icon   = new BMap.Icon( pointImg_Obj, new BMap.Size( 40, 40 ) )                                // 自定义标注样式( 加入前面图片对象 )
                     let building_Marker = new BMap.Marker( new BMap.Point(longitude,latitude), { icon: building_Icon} )         // 创建信息自定义标识(将样式加入)
+
+
+                    building_Marker.setTitle( code )
+
+
                     baiduMap.addOverlay( building_Marker )                                                                      // 添加建筑物 坐标覆盖物
+
+                    // 详细覆盖物 - 添加监听点击事件
+                    building_Marker.addEventListener('click',function( target ){
+                        // console.log( '点击详细覆盖物' + target )
+                        console.log( building_Marker.getTitle() )
+
+                        console.dir( target )
+                    })
+
+
                 }
                 // 遍历返回的具体写字楼结果 数组
                 for( let i = 0; i < ObjGroup.length; i++ ) {
@@ -308,16 +328,11 @@ export default {
                 // overlayObj.addEventListener('click',function(){
                 //     console.log( 'dianji' )
                 // })
+                // event{type, target, point, pixel}
 
-                // console.log( overlayObj )
                 // overlayObj.addEventListener('click',function(){
-                //     console.log( 'dianji' )
+                //     console.log( 'dianji111' )
                 // })
-                // 2.
-                // overlayObj.click = function(){
-                //     console.log('1')
-                // }
-                // console.dir( overlayObj )
             }
         }
     }
