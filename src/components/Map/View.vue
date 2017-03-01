@@ -203,6 +203,21 @@ export default {
                     // addRangeOverlay.addEventListener()
                     // this.addEventListener()
                     // div.addEventListener( 'click', console.log('1111') )
+
+                    // listen click event for mobile devices
+                    let isFling = false;
+                    div.addEventListener("touchstart", function(e){
+                            isFling = true;
+                    });
+                    div.addEventListener("touchmove", function(e){
+                            isFling = false;
+                    });
+                    div.addEventListener("touchend", function(e){
+                            if(isFling){
+                                alert("click from touch");
+                            }
+                    });
+
                     div.onclick = function(){
                         alert( '点击事件' )
                     }
