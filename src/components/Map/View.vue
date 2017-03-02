@@ -205,22 +205,26 @@ export default {
                     // div.addEventListener( 'click', console.log('1111') )
 
                     // listen click event for mobile devices
-                    let isFling = false;
+                    let isFling = false
                     div.addEventListener("touchstart", function(e){
-                            isFling = true;
-                    });
+                        isFling = true
+                    })
                     div.addEventListener("touchmove", function(e){
-                            isFling = false;
-                    });
+                        isFling = false
+                    })
+                    // 触发点击, 打印出code信息, 然后跳转相应的层级
                     div.addEventListener("touchend", function(e){
-                            if(isFling){
-                                alert("click from touch");
-                            }
-                    });
+                        if( isFling ){
+                            // alert("click from touch")
+                            console.log( code )
+                        }
+                    })
 
                     div.onclick = function(){
                         alert( '点击事件' )
                     }
+
+
                     // console.log( this )
                     let overlayObj = div
                     saveOverlayObj( overlayObj )
