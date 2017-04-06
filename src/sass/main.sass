@@ -1,0 +1,154 @@
+@charset "utf-8"
+
+// 颜色 + 字体 + 变量 + 继承 + 混合 + REM转换
+@import "./helpers/Color"
+@import "./helpers/Font"
+@import "./helpers/Var"
+@import "./helpers/Extend"
+@import "./helpers/Mixins"
+@import "./helpers/REM"
+
+// 按钮状态 + 统一距离管理( 不同类型边距/填充 )
+@import "./state/BtnState"
+@import "./state/Distance"
+
+/*
+ *  业务逻辑 部分
+ */
+// 通用修饰下划线
+%auto--borderBottomSoild
+    border-bottom: 1px solid rgba($C-L-text, .3)
+
+// 通用 - 内容容器
+=auto--contentBox($auto--paddingSize, $titleColor, $titleSize, $textColor, $textSize)
+    +REM(padding, $auto--paddingSize)
+    +REM(margin-top, $auto--paddingSize)
+    @extend %justify                            // 两侧对其
+    &:last-child
+        +REM(margin-bottom, $auto--paddingSize)
+    h3
+        +REM(font-size, $titleSize)
+        font-weight: bold
+        +REM(padding-bottom, $titleSize/2)
+        color: rgba($titleColor, .7)
+    p
+        +REM(font-size, $textSize)
+        +REM(line-height, $textSize*2)
+        color: $C-L-text
+
+// 通用 -AppBar导航栏样式混合
+=auto--AppBar
+    .mu-paper-1
+        top: 0 !important
+        bottom: initial !important
+        box-shadow: 0 1px 2px rgba(0,0,0,.117647), 0 1px 3px rgba(0,0,0,.117647) !important
+        +bC($C-W)
+        .mu-icon
+            color: $C-L-text !important
+        h2
+            color: $C-L-text !important
+            text-align: center
+
+// 通用 - 房源详情页 样式内容 ( 适应于 办公楼 + 联合办公 )
+=auto--BuildingDetails
+    // 介绍部分
+    .intro
+        +REM(padding, $D-autoMargin)
+        +bC($C-W)
+        h2
+            +REM(font-size, $bigTitle-size)
+            +REM(line-height, $bigTitle-size*2)
+            color: $title-color
+        ul li
+            +REM(padding-top, $D-autoMargin/2)
+            +REM(padding-bottom, $D-autoMargin/2)
+            overflow: hidden
+            border-bottom: 1px solid rgba($C-L-text,.3)
+            // 详细地址 样式 ( 地址右侧有个小灰线 )
+            &:first-child
+                >p
+                    float: left
+                    @extend %dib
+                    +REM(padding-left, $D-autoMargin/2)
+                    +REM(padding-right, $D-autoMargin/2)
+                    border-right: 1px solid rgba($C-L-text, .3)
+                >p.origin
+                    padding-left: 0
+                >p.end
+                    border-right: none
+            span
+                float: left
+                min-width: 25%
+                +REM(font-size, $text-size)
+                color: rgba($title-color, .8)
+                font-weight: bold
+            p
+                +REM(font-size, $text-size)
+                color: $C-L-text
+                >b
+                    color: $C-theme
+    .contentBox
+        // 传入默认参数
+        +auto--contentBox($D-autoMargin, $title-color, $title-size, $C-L-text, $text-size)
+        +bC($C-W)
+    // 列表样式
+    .buildingDetails--list
+        ul li
+            @extend %flexWrap
+            padding: 0
+            +REM(padding-top, $D-autoMargin/2)
+            +REM(padding-bottom, $D-autoMargin/2)
+            border-bottom: 1px solid rgba($C-L-text,.3)
+            >div
+                flex: 1
+                >img
+                    width: 100%
+            >p
+                flex: 1
+                @extend %flexCenter             // 保持居中
+                +REM(font-size, $C-W-badge*.75)
+                >b
+                    color: $C-theme
+            p.priceMonth, p.priceDay
+                flex: 1.5
+            p.decorationStr
+                flex: .5
+    // 提交表单 样式
+    .mu-text-field.focus-state
+        color: $C-theme !important
+        .mu-text-field-line, .mu-text-field-focus-line
+            +bC($C-theme !important)
+    // 按钮颜色样式
+    .mu-raised-button-primary
+        +bC($C-theme !important)
+        // 图标样式
+        .mu-icon
+            color: $C-W !important
+
+// /*
+//  *  项目按钮样式( 此处样式用于抵消Muse-ui部分按钮样式 )
+//  */
+// // 按钮统一样式
+// .mu-raised-button-primary
+//     +mL(6%)
+//     +bC($C-theme)
+
+// // 委托找房 - 按钮样式
+// #findProperties, #putInProperties
+//     .material-icons
+//         color: $C-theme  !important
+//     // 按钮图标样式 ( 特定 )
+//     .mu-raised-button-primary
+//         .material-icons
+//             color: $C-W !important
+
+// .mu-text-field.multi-line .mu-text-field-hint
+//     line-height: .7rem
+
+// // 首页 - '服务页' - icon图标颜色
+// #serviceIcon .serviceIcon__box .mu-icon
+//     color: $C-W !important
+
+// // 首页 - '服务页' - 表单图标颜色
+// #serviceIcon .serviceFormBtn--box .mu-icon
+//     color: $C-theme  !important
