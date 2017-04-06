@@ -1,8 +1,11 @@
-<template>
-    <div id="app">
-        <img src="./assets/logo.png">
-        <router-view></router-view>
-    </div>
+<template lang="pug">
+div
+    mu-float-button.demo-float-button( icon="add" )
+    mu-float-button.demo-float-button( icon="add" mini )
+    mu-float-button.demo-float-button( icon="add" secondary )
+    mu-float-button.demo-float-button( icon="add" secondary mini )
+    mu-float-button.demo-float-button( icon="star" disabled )
+    mu-float-button.demo-float-button( icon="star" disabled mini )
 </template>
 
 <script>
@@ -11,13 +14,9 @@ export default {
 }
 </script>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style lang="sass">
+@import "./sass/main"
+
+.demo-float-button
+    margin-right: 12px
 </style>

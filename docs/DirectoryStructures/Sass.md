@@ -33,6 +33,10 @@ Sass/
       |
       |- _Swiper.min.scss                   # Swiper轮播组件 样式
   |
+  |- Common/                            # 通用的样式配置
+      |
+      |- _Auto.sass                         # 项目内适用的一些通用样式
+  |
   |- main.sass                          # 主Sass文件
 ```
 
