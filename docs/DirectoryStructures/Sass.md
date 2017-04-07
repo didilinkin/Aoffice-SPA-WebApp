@@ -23,19 +23,17 @@ Sass/
       |
       |- _Var.sass                          # 变量( 考虑废弃 )
   |
-  |- Modules/                           # 项目模块( 有样式输出! )
+  |- Modules/                           # 项目内 通用模块的样式
       |
-      |- _ModulesMixins.sass                # 模块 - 混合
+      |- _ModulesMixins.sass                # 模块 - 可复用 混合
+      |
+      |- _ModulesStyle.sass                 # 模块 - 可复用 样式( 有样式输出! )
   |
   |- Vendors/                           # 框架样式( 有样式输出! )
       |
       |- _MuseUi.sass                       # Muse-ui 样式
       |
       |- _Swiper.min.scss                   # Swiper轮播组件 样式
-  |
-  |- Common/                            # 通用的样式配置
-      |
-      |- _Auto.sass                         # 项目内适用的一些通用样式
   |
   |- main.sass                          # 主Sass文件
 ```

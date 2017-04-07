@@ -8,7 +8,7 @@ const pngquant = require( 'imagemin-pngquant' )                // PNG图片压�
 // 图片压缩
 gulp.task( 'imagemin', function() {
     // 未压缩图片( 处理前 需要手动将src路径下的静态图片资源清空 )
-    gulp.src( './unCompressionImages/*.{png,jpg,gif,ico}' )
+    gulp.src( './uncompressedImages/*.{png,jpg,gif,ico}' )
     .pipe( imagemin({
         progressive: true,
         svgPlugins: [{
@@ -16,8 +16,10 @@ gulp.task( 'imagemin', function() {
         }],
         use: [pngquant()]
     }) )
-    .pipe( gulp.dest( './src/assets/img/' ) )
+    .pipe( gulp.dest( './src/assets/images/' ) )
 })
 
 // 默认任务 - 压缩图片
-gulp.task( 'default', ['imagemin'] )
+gulp.task(
+    'default', ['imagemin']
+)

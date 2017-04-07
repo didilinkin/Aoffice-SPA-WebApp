@@ -25,7 +25,15 @@ module.exports = {
         // 字串用使用单引号( 警告级别, 尽量使用单引号 )
         "quotes": ["warn", "single"],
         // 禁止出现未使用过的变量
-        "no-unused-vars": ["error", { "vars": "all" }],
+        "no-unused-vars": [
+            // 如果不需要检查的变量( 全局引入变量 ), 使用注明方法说明
+            // 注释:  foo is considered used here // 'foo'变量不需要
+            "error", { 
+                // 全部 变量检查
+                "vars": "all",
+                // 全部 参数检查
+                "args": "all"
+            }],
         // 要求或禁止函数圆括号之前有一个空格
         "space-before-function-paren": ["error", {
             // 匿名函数
@@ -149,7 +157,7 @@ module.exports = {
         // 强制圆括号内有一个空格
         "space-in-parens": ["error", "always", {
             // 当圆括号内包含花括号时, 不需要空格
-            "exceptions": ["{}"] 
+            "exceptions": ["{}", "[]"] 
         }],
         // 要求或禁止在注释前有空白
         "spaced-comment": ["error", "always"],
@@ -200,7 +208,7 @@ module.exports = {
          *  部署规则( 开发时, 将其关闭 )
          */
         // 禁用 console
-        "no-console": "error"
+        "no-console": "off"
     }
 }
 

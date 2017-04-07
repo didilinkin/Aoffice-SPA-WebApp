@@ -16,6 +16,7 @@ Vue.config.devtools = true
 Vue.config.debug = true
 
 Vue.use( MuseUI )
+
 /* eslint-disable no-new */
 new Vue({
     el: '#app',
@@ -24,3 +25,12 @@ new Vue({
     template: '<App/>',
     components: { App }
 })
+
+// 不同平台下的文字效果不同
+if ( /(iPhone|iPad|iPod|iOS )/i.test( navigator.userAgent ) ) {
+    document.body.style.fontFamily = 'PingFang SC Regular'
+} else if ( /(Android)/i.test( navigator.userAgent ) ) {
+    document.body.style.fontFamily = 'NoteSansCJKsc-Regular'
+} else {
+    document.body.style.fontFamily = 'Microsoft Yahei'
+}
