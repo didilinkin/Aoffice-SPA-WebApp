@@ -3,3 +3,8 @@
 
 =REM($attr, $size)
     #{$attr}: ($size/37.5px)*1rem
+
+// 可定义宽度( 并转换成REM )的混合
+=REM-imgCover($width)
+    +REM(width, $width)
+    object-fit: cover

@@ -78,7 +78,9 @@ module.exports = {
         // 强制在单行代码块中使用一致的空格
         "block-spacing": "error",
         // 定义和赋值变量时, 只允许使用驼峰命名
-        "camelcase": ["error", { properties: "always" }],
+        "camelcase": ["error", {
+            properties: "always"
+        }],
         // 禁止使用拖尾逗号: 最后一个 元素/属性 后面禁止使用逗号
         "comma-dangle": ["error", "never"],
         // 调用函数时, 括号前禁止使用空格
@@ -88,7 +90,9 @@ module.exports = {
             // 冒号前 禁止出现空格
             "beforeColon": false,
             // 冒号后 至少有一个空格
-            "afterColon": true
+            "afterColon": true,
+            // 对象字面量中的冒号和值都水平对齐
+            // "align": "colon"
         }],
         // 构造函数 命名首字母必须是大写
         "new-cap": ["error", { "newIsCap": true }],

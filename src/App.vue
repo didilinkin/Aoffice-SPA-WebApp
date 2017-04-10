@@ -1,6 +1,12 @@
 <template lang="pug">
 #index
-    #loading
+    // 加载动画
+    #loading( v-if="loadingObj.loadingState" )
+        img( v-bind:src="loadingObj.loadingImgUrl" )
+    // 动画完成
+    div( v-else )
+        router-view( name="AppContent" )
+        router-view( name="AppBottomNav" )
 </template>
 
 <script>
@@ -9,24 +15,28 @@
 export default {
     name: 'app',
     methods: {
-        // 目的: 测试 $store中modules的别名actions
-        testModulesActions() {
-            // console.log( this.$store.state.globalState )    // 测试模块状态是否加载: 成功
+        // 目的: 获取首页数据
+        getDiscoverInfo() {
+            // 测试获取 city数据
+            // console.log( this.$store.state.globalState.cityInfo.cityCode )
             this.$store.dispatch({
-                type: 'globalState/TEST_ACTIONS'
+                type: 'discover/GET_DISCOVER_INFO',
+                cityCode: this.$store.state.globalState.cityInfo.cityCode
             })
-        }
+        } 
     },
     data() {
         return {
-            // 加载动画
-            loadingAnimation: {
-                imgUrl: require( './assets/images/loading.png' )
+            loadingObj: {
+                // 加载 状态
+                loadingState: this.$store.state.globalState.loadingState.judgeShow,
+                // 加载 图片
+                loadingImgUrl: require( './assets/images/loading.png' )
             }
         }
     },
     mounted: function() {
-        this.testModulesActions()     // 测试 $store中modules的别名actions
+        this.getDiscoverInfo()               // 获取首页数据
     }
 }
 </script>
@@ -34,6 +44,6 @@ export default {
 <style lang="sass">
 @import "./sass/main"
 
-.demo-float-button
-    margin-right: 12px
+#loading >img
+    +imgCover( 100% )
 </style>
