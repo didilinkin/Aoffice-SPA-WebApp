@@ -3,10 +3,12 @@ import mutations    from './mutations'
 import * as types   from './types'
 
 const state = {
+    // '发现' - 请求状态
+    requestState: false,
     // '发现' - 轮播图
-    discoverBannerImg: [],
+    bannerImgArr: [],
     // '发现' - '热门房源'
-    discoverBuilding: []
+    hotBuildingArr: []
 }
 
 export default {
