@@ -41,9 +41,11 @@ export default {
         // 正式
         const asyncDiscoverInfo = async function() {
             try {
+                console.log( '成功!' )
                 let result = await discoverAPI.apiDiscoverInfoA( paramsObj.cityCode )
                 console.log( result )
             } catch( err ) {
+                console.log( '失败' )
                 console.log( err )  // 捕捉到错误
             }
         }

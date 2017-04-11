@@ -16,6 +16,22 @@ module.exports = merge(baseWebpackConfig, {
     rules: utils.styleLoaders({ sourceMap: config.dev.cssSourceMap })
   },
   // cheap-module-eval-source-map is faster for development
+  devServer: {
+    stats: {
+        colors: true
+    },
+    proxy: {
+        '/api': {
+            // target: 'http://10.101.64.45:8080',
+            target: 'http://app.aplusoffice.cn/',
+            // pathRewrite: {
+            //     '^/json': '/ui-document/json'
+            // },
+            changeOrigin: true,
+            secure: false
+        }
+    }
+  },
   devtool: '#cheap-module-eval-source-map',
   plugins: [
     new webpack.DefinePlugin({
