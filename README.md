@@ -37,6 +37,9 @@ npm run dev
 # 当修改代码后,需要手动打包发布时,运行npm run build命令进行打包
 yarn run build
 npm run build
+
+# 打包生产模式,缩小压缩包 -- 查看包分析报告
+npm run build --report
 ```
 ## API docs / 接口文档
 

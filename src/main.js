@@ -10,7 +10,8 @@ import store        from './store'
 import router       from './router'
 
 // require( './assets/script/animatelo.min' )
-require( './assets/iconFont/material-icons.css' )
+// require( './assets/iconFont/material-icons.css' )
+require( './assets/iconFont/font-awesome.min.css' )
 
 Vue.config.productionTip = false
 Vue.config.devtools = true

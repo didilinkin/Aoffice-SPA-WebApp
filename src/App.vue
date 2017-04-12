@@ -4,6 +4,7 @@
         img( v-bind:src="loadingObj.loadingImgUrl" )
     div( v-else )
         h1 加载完成
+        i( class="fa fa-user-circle" )
         router-view( name="AppContent" )
         router-view( name="AppBottomNav" )
 </template>
