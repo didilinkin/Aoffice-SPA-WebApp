@@ -3,9 +3,6 @@
     #loading( v-if="!this.$store.state.discover.requestState" )
         img( v-bind:src="loadingObj.loadingImgUrl" )
     div( v-else )
-        h1 加载完成
-        // 测试FA图标( 成功 )
-        i( class="fa fa-user-circle" )
         // 测试 'vue-awesome-swiper' 轮播效果( 成功 )
         swiper( v-bind:options="swiperOption" )
             swiper-slide Slide1
