@@ -11,13 +11,15 @@
 
 <script>
 /* global require: true */
+import { mapGetters } from  'vuex'
+
 export default {
     name: 'app',
     methods: {
         // 目的: 获取首页数据
         getDiscoverInfo() {
             this.$store.dispatch({
-                type: 'discover/GET_DISCOVER_INFO',
+                type: 'discover/REQUEST_DISCOVER_INFO',
                 cityCode: this.$store.state.globalState.cityInfo.cityCode
             })
         }
@@ -27,6 +29,15 @@ export default {
             loadingObj: {
                 loadingImgUrl: require( './assets/images/loading.png' )
             }
+        }
+    },
+    computed: mapGetters({
+        getterDiscoverInfo: 'getterDiscoverInfo'
+    }),
+    watch: {
+        // 监听: 测试modules getters是否收到消息
+        getterDiscoverInfo: function() {
+            console.log( 'getters获取到信息!' )
         }
     },
     mounted: function() {

@@ -2,7 +2,7 @@ import * as discoverAPI     from './api'
 import * as types           from './types'
 
 export default {
-    [types.GET_DISCOVER_INFO]: ({ commit }, paramsObj ) => {
+    [types.REQUEST_DISCOVER_INFO]: ({ commit }, paramsObj ) => {
         const asyncDiscoverInfo = async function() {
             try {
                 let result = await discoverAPI.apiDiscoverInfo( paramsObj.cityCode )
