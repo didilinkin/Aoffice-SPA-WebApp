@@ -5,13 +5,35 @@
     div( v-else )
         h1 加载完成
         i( class="fa fa-user-circle" )
+
+        md-card
+            md-card-actions( v-md-ink-ripple )
+
+                .md-subhead
+                    span 响应式/全屏/分页
+
+                md-button.md-icon-button(
+                    target="_blank"
+                    href="https://github.com/surmon-china/vue-awesome-swiper/blob/master/examples/02-responsive.vue"
+                )
+                    md-icon code
+            md-card-media
+                // swiper
+                swiper( v-bind:options="swiperOption" )
+                    swiper-slide Slide 1
+                    swiper-slide Slide 2
+                    swiper-slide Slide 3
+                    swiper-slide Slide 4
+                    .swiper-pagination( slot="pagination" )
+
+
         router-view( name="AppContent" )
-        router-view( name="AppBottomNav" )
+        router-view( name="AppBottomNav" )  
 </template>
 
 <script>
 /* global require: true */
-import { mapGetters } from  'vuex'
+import { swiper, swiperSlide } from 'vue-awesome-swiper'
 
 export default {
     name: 'app',
@@ -28,21 +50,17 @@ export default {
         return {
             loadingObj: {
                 loadingImgUrl: require( './assets/images/loading.png' )
+            },
+            swiperOption: {
+                pagination: '.swiper-pagination',
+                paginationClickable: true
             }
-        }
-    },
-    computed: mapGetters({
-        getterDiscoverInfo: 'getterDiscoverInfo'
-    }),
-    watch: {
-        // 监听: 测试modules getters是否收到消息
-        getterDiscoverInfo: function() {
-            console.log( 'getters获取到信息!' )
         }
     },
     mounted: function() {
         this.getDiscoverInfo()
-    }
+    },
+    components: { swiper, swiperSlide }
 }
 </script>
 
