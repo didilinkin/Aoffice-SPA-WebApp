@@ -1,21 +1,20 @@
 // '发现'页 
 <template lang="pug">
 #Discover
-    h1 '发现'加载完成
-    // 将 $store中的 轮播图状态 绑定到 swiper组件props上
+    SwiperModule( v-bind:swiperArr="bannerArr" )
 </template> 
 
 <script>
-import { mapGetters } from 'vuex'
-
-import Swiper from '../components/common/Swiper'
-const components = { Swiper }
+import SwiperModule from '../components/common/SwiperModule'
+const components = { SwiperModule }
 
 export default {
     name: 'Discover',
-    computed: mapGetters({
-        getterDiscoverBannerImgArr: 'getterDiscoverBannerImgArr'
-    }),
+    data() {
+        return {
+            bannerArr: this.$store.state.discover.bannerImgArr
+        }
+    },
     components: components
 }
 </script>

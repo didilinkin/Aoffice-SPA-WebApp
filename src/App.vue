@@ -1,7 +1,7 @@
 <template lang="pug">
 #index
     #loading( v-if="!this.$store.state.discover.requestState" )
-        img( v-bind:src="loadingObj.loadingImgUrl" )
+        img( v-bind:src="loadingImg" )
     div( v-else )
         router-view( name="AppContent" )
         router-view( name="AppBottomNav" )  
@@ -22,9 +22,7 @@ export default {
     },
     data() {
         return {
-            loadingObj: {
-                loadingImgUrl: require( './assets/images/loading.png' )
-            }
+            loadingImg: require( './assets/images/loading.png' )
         }
     },
     mounted: function() {

@@ -1,25 +1,28 @@
 // 公用组件 - 轮播
 <template lang="pug">
-swiper( v-bind:options="swiperOption" )
-    swiper-slide Slide1
-    swiper-slide Slide2
-    swiper-slide Slide3
-    swiper-slide Slide4
-    // swiper-slide( v-for="item in swiperArr" )
-
+swiper.swiperClass( v-bind:options="swiperOption" )
+    swiper-slide( v-for="item in swiperArr" v-bind:key="item.imgUrl" )
+        img.discoverBannerImg( v-bind:src="item.imgUrl" )
     .swiper-pagination( slot="pagination" )
 </template>
 
 <script>
+/* global require: true */
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
 const components = { swiper, swiperSlide }
 
 export default {
-    name: 'swiper',
+    name: 'SwiperModule',
     props: {
-        type: Array,                                    // 验证 - 接口类型
-        default: function() {                           // 默认值
-            return [ 1, 2, 3, 4 ]                          // 可设为预设图 - '图片等待' 
+        swiperArr: {
+            type: Array,
+            default: function() {
+                return [
+                    {
+                        imgUrl: require( '../../assets/images/discoverBannerError.jpg' )
+                    }
+                ]
+            }
         }
     },
     data() {
@@ -37,3 +40,13 @@ export default {
     components: components
 }
 </script>
+
+<style lang="sass">
+@import "../../sass/main"
+
+.swiperClass
+    .discoverBannerImg  // 轮播图 - 图片样式
+        +imgCover( 100% )
+    .swiper-pagination >.swiper-pagination-bullet-active    // 圆点样式 - 主题色
+        +bC( $C-theme )
+</style>
