@@ -1,8 +1,12 @@
 @charset "utf-8"
 // REM转换混合
 
-=REM($attr, $size)
-    #{$attr}: ($size/37.5px)*1rem
+=REM( $attr, $size, $important: null )
+    #{$attr}: ( $size/37.5px )*1rem #{$important}
+
+=REM-W-H( $width, $height: $width )
+    +REM( width, $width )
+    +REM( height, $height )
 
 // 可定义宽度( 并转换成REM )的混合
 =REM-imgCover($width)

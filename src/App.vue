@@ -2,7 +2,7 @@
 #index
     #loading( v-if="!this.$store.state.discover.requestState" )
         img( v-bind:src="loadingImg" )
-    div( v-else )
+    div.routerRender( v-else )
         router-view( name="AppContent" )
         router-view( name="AppBottomNav" )  
 </template>
@@ -33,6 +33,7 @@ export default {
 
 <style lang="sass">
 @import "./sass/main"
+@import "./sass/vendors/MuseUi" // 样式输出 - 抵消默认样式
 
 #loading >img
     +imgCover( 100% )

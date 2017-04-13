@@ -31,7 +31,7 @@ export default {
                 pagination: '.swiper-pagination',       // 页码元素绑定
                 paginationClickable: true,              // 页码点击可实现
                 centeredSlides: true,                   // 幻灯片居中
-                autoplay: 3000,                         // 自动运行 时间间隔
+                autoplay: 2000,                         // 自动运行 时间间隔
                 autoplayDisableOnInteraction: false,    // 自动运行 失去活动功能
                 effect: 'fade'                          // 渐变效果
             }

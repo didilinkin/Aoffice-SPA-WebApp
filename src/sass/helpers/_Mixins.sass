@@ -1,16 +1,11 @@
 @charset "utf-8"
-// 混合管理( 带参数的混合宏 + 简写样式 )
+
 @import "./Color"
 @import "./Font"
 @import "./Var"
 @import "./Extend"
 @import "./REM"
 
-/*
- *
- *  常用混合( 带参数 )
- *
- * /
 // 跨浏览器设置透明度
 =opacity($opacity)
     opacity: $opacity
@@ -148,9 +143,6 @@
 	box-shadow: 1px 1px 1px rgba(0,0,0, .29), inset 1px 1px 1px rgba(255,255,255, .44)
 	transition: all 0.15s ease
 
-/*
- *  常用混合( 无参 )
- * /
 
 // flex居中
 =flexCenter
@@ -171,6 +163,9 @@
 
 =ABS
     position: absolute
+
+=FIXED
+    position: fixed
 
 =floatL
     float: left
@@ -197,9 +192,6 @@
 =H100
     height: 100%
 
-/*
- *  强调混合
- */
 // 移动端图片控制
 =mobileImg($imgHeight)
     width: 100%
