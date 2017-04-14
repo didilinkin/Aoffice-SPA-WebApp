@@ -12,11 +12,11 @@ import { swiper, swiperSlide } from 'vue-awesome-swiper'
 const components = { swiper, swiperSlide }
 
 export default {
-    name: 'SwiperModule',
+    name: 'Swiper',
     props: {
         swiperArr: {
             type: Array,
-            default: function() {
+            default: () => {
                 return [
                     {
                         imgUrl: require( '../../assets/images/discoverBannerError.jpg' )

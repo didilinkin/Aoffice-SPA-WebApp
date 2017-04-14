@@ -18,6 +18,7 @@
 | [Pug](https://pugjs.org/zh-cn/api/getting-started.html)       | Node模版语言    |  2.0.0-beta11  |
 
 ## Build Setup / 开发流程
+#### **请尽量确保 本地Nodejs版本 >= 7**
 
 ``` bash
 # install dependencies/拉取项目,在项目路径下执行

@@ -53,7 +53,7 @@
 =fZ($size)
     font-size: $size
 
-=fW($fontWeight)
+=fW($fontWeight: 500)
     font-weight: $fontWeight
 
 =fontStyle($size, $lineHeight, $color)
@@ -63,6 +63,27 @@
 
 =bC($backgroundColor)
     background-color: $backgroundColor
+
+=light( $color, $size )
+    lighten( $color, $size )
+
+=dark( $color, $size )
+    darken( $color, size )
+
+=gray( $color )
+    greyscale( $color )
+
+// 只考虑加深或者变浅, 未添加灰度
+// 参数: 伪类名称, 变色的属性名称, 处理的颜色函数, 颜色变量, 颜色变化量
+=pseudoClassColor( $pseudoName, $attr, $colorFunction, $color, $size )
+    &:#{$pseudoName}
+        @if $colorFunction == darken
+            #{$attr}: darken( $color, $size )
+        @else if $colorFunction == lighten
+            #{$attr}: lighten( $color, $size )
+
+=complement( $color )       // 补充色
+    complement( $color )
 
 =bP($backgroundPositionX, $backgroundPositionY)
     background-position: $backgroundPositionX $backgroundPositionY
@@ -145,14 +166,18 @@
 
 
 // flex居中
-=flexCenter
+=flexCenter( $align: center, $justify: center )
     display: flex
-    align-items: center
-    justify-content: center
+    align-items: $align
+    justify-content: $justify
 
 // 文本居中
 =textCenter
     text-align: center
+
+// margin居中
+=mC
+    margin: 0 auto
 
 // 清除浮动
 =overflow

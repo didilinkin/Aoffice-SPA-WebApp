@@ -1,3 +1,21 @@
 @charset "utf-8"
 // 模块 - ( 有样式输出! )
+@import "../helpers/Color"
+@import "../helpers/Font"
+@import "../helpers/Var"
+@import "../helpers/Extend"
+@import "../helpers/Mixins"
+@import "../helpers/REM"
 
+@import "../Components/Button"
+@import "../Components/Distance"
+
+.auto--moduleMarginTop
+    +REM( margin-top, $D-autoMargin )
+
+.auto--modulePaddingTB
+    +REM-padding-TB( $D-autoPadding )
+
+.auto--moduleStyle
+    @extend .auto--moduleMarginTop
+    @extend .auto--modulePaddingTB

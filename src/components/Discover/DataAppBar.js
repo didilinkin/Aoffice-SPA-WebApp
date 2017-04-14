@@ -1,23 +1,23 @@
-const appBarObj = [
+const dataAppBar = [
     {
         title: '新功能介绍',
-        toAboutInfo: 'newFeatures'
+        aboutInfoUrl: 'newFeatures'
     }, {
         title: '常见问题',
-        toAboutInfo: 'FAQ'
+        aboutInfoUrl: 'FAQ'
     }, {
         title: '关于我们',
-        toAboutInfo: 'aboutUs'
+        aboutInfoUrl: 'aboutUs'
     }, {
         title: '商务合作',
-        toAboutInfo: 'cooperation'
+        aboutInfoUrl: 'cooperation'
     }, {
         title: '隐私政策',
-        toAboutInfo: 'privacyPolicy'
+        aboutInfoUrl: 'privacyPolicy'
     }, {
         title: '版权信息',
-        toAboutInfo: 'copyrightInfo'
+        aboutInfoUrl: 'copyrightInfo'
     }
 ]
 
-export { appBarObj }
+export { dataAppBar }

@@ -2,13 +2,15 @@
 <template lang="pug">
 #Discover
     AppBar
-    SwiperModule( v-bind:swiperArr="bannerArr" )
+    Swiper( v-bind:swiperArr="bannerArr" )
+    ServiceNav
 </template> 
 
 <script>
 import AppBar           from '../components/Discover/AppBar'
-import SwiperModule     from '../components/common/SwiperModule'
-const components = { AppBar, SwiperModule }
+import Swiper           from '../components/common/Swiper'
+import ServiceNav       from '../components/Discover/ServiceNav'
+const components = { AppBar, Swiper, ServiceNav }
 
 export default {
     name: 'Discover',

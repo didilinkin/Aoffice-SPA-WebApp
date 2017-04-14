@@ -5,20 +5,19 @@ mu-appbar#DiscoverAppBar
     div( class="DiscoverAppBar__search" @click="toSearch()" )
         mu-icon-button( class="fa fa-search" )
     mu-icon-button( class="fa fa-commenting" slot="right" )
-
-    // 隐藏在左侧
+    
     mu-drawer.left--box( v-bind:open="open" v-bind:docked="docked" @close="toggle()" )
         mu-list( @itemClick="docked ? '' : toggle()" )
             mu-list-item( 
                 v-for="item in muDrawerLeft"
                 v-bind:key="item.title"
                 v-bind:title="item.title"
-                @click="toAboutInfo( item.toAboutInfo )"
+                @click="toAboutInfo( item.aboutInfoUrl )"
             )
 </template>
  
 <script>
-import { appBarObj } from  './DataAppBar'   // 静态数据
+import { dataAppBar } from  './DataAppBar'   // 静态数据
 
 export default {
     name: 'AppBar',
@@ -38,7 +37,7 @@ export default {
         return {
             open: false,
             docked: true,
-            muDrawerLeft: appBarObj
+            muDrawerLeft: dataAppBar
         }
     }
 }

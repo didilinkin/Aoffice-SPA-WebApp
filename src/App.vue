@@ -33,7 +33,11 @@ export default {
 
 <style lang="sass">
 @import "./sass/main"
-@import "./sass/vendors/MuseUi" // 样式输出 - 抵消默认样式
+@import "./sass/vendors/MuseUi"         // 样式输出 - UI - 抵消默认样式
+@import "./sass/Modules/ModulesStyle"   // 样式输出 - 项目 - 通用样式
+
+#index
+    +bC( $C-base )
 
 #loading >img
     +imgCover( 100% )
