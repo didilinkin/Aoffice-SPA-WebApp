@@ -17,7 +17,7 @@ mu-appbar#DiscoverAppBar
 </template>
  
 <script>
-import { dataAppBar } from  './DataAppBar'   // 静态数据
+import { dataAppBar } from  './DataAppBar.js'   // 静态数据
 
 export default {
     name: 'AppBar',
