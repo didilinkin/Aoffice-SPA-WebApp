@@ -67,9 +67,8 @@ export default {
             >img
                 +imgCover( 100% )
         >p
-            +REM-fontStyle( $F-title, 1 )
+            +REM-fontStyle( $F-title, $C-title,  1 )
             +fW
-            color: $C-title
             +pseudoClassColor( active, color, darken, $C-title, 10% )
 
 .ServiceNav__toFormBtnBox       // 前往表单页 按钮容器
@@ -83,9 +82,7 @@ export default {
         >img
             +imgCover( 40% )
         >h4
-            +REM-fontStyle( $F-title, 2 )
-            color: $C-EnterpriseService
+            +REM-fontStyle( $F-title, $C-EnterpriseService, 2 )
         >p
-            +REM-fontStyle( $F-text )
-            color: $C-text
+            +REM-fontStyle( $F-text, $C-text )
 </style>

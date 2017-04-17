@@ -91,7 +91,7 @@
 =lS($letterSpacing)
     letter-spacing: $letterSpacing  // 设置字符间距。
 
-=tD($textDecoration:none)
+=textD($textDecoration:none)
     text-decoration: $textDecoration    // 向文本添加修饰( 避免下划线 )
 
 =listST($listStyleType:none)
@@ -100,7 +100,7 @@
 =oC($outlineColor)
     outline: $outlineColor      // 轮廓颜色
 
-=radius( $size )
+=radius($size)
     border-radius: $size    // 圆角混合( 接受圆角百分比值 )
 
 =borderW($borderWidth)
@@ -108,6 +108,9 @@
 
 =borderC($borderColor)
     border-color: $borderC          // 边框颜色
+
+=borderBottom( $color )
+    border-bottom: 1px solid $color
 
 // 0.5像素边框线混合( 依赖上方部分混合, 所以此混合位置要在最后 )
 =halfString( $color, $width )

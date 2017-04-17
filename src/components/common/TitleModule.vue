@@ -49,8 +49,7 @@ export default {
         z-index: 2
         +REM( padding-left, $D-autoPadding )
         +REM( padding-right, $D-autoPadding )
-        +REM-fontStyle( $F-title, 1 )
-        color: $C-title
+        +REM-fontStyle( $F-title, $C-title, 1 )
         +fW( bold )
         white-space: nowrap
 </style>

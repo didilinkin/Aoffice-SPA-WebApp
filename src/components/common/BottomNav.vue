@@ -46,11 +46,11 @@ export default {
     +W100
 
 .bottomNav--box
-    +REM( height, 60px )
+    +REM( height, $D-autoBottomNavHeight )
     .bottomNav--box--item
         +flexCenter
         +textCenter
-        +tD
+        +textD
         .mu-buttom-item-wrapper
             height: initial
         .mu-bottom-item-text    

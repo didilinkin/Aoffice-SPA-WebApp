@@ -17,9 +17,10 @@
     +REM( padding-right, $padding-right )
 
 // REM 字体转换
-=REM-fontStyle( $fontSize, $lineHeight: 1.5 )
+=REM-fontStyle( $fontSize, $fontColor, $lineHeight: 1.5 )
     +REM( font-size, $fontSize )
     +REM( line-height, $fontSize*$lineHeight )
+    color: $fontColor
 
 // 可定义宽度( 并转换成REM )的混合
 =REM-imgCover($width)

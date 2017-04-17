@@ -18,13 +18,13 @@ export default {
             buildingListArr[i].appListUrl = 'http://images.aplusoffice.cn/' + buildingListArr[i].appListUrl
             if( buildingListArr[i].type === 'A' ) {
                 buildingListArr[i]['badge'] = '写字楼'
-                buildingListArr[i]['judgeShow'] = true
+                buildingListArr[i]['officeBuilding'] = true
             } else {
                 buildingListArr[i]['badge'] = '联合办公'
-                buildingListArr[i]['judgeShow'] = false
+                buildingListArr[i]['officeBuilding'] = false
             }
         }
-        state.hotBuildingArr = buildingListArr
+        state.resoutceArr = buildingListArr
         setTimeout( function() {
             state.requestState = true
         }, 3000 )

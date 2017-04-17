@@ -16,7 +16,7 @@ export default {
     props: {
         swiperArr: {
             type: Array,
-            default: () => {
+            default: function() {
                 return [
                     {
                         imgUrl: require( '../../assets/images/discoverBannerError.jpg' )

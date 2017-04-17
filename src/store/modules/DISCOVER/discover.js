@@ -6,7 +6,7 @@ import * as types   from './types'
 const state = {
     requestState: false,
     bannerImgArr: [],
-    hotBuildingArr: []
+    resoutceArr: []
 }
 
 export default {
