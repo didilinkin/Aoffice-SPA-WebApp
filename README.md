@@ -53,4 +53,5 @@ npm run build --report
 - [ ]  路由 添加过渡动效
 - [ ]  组件 懒加载
 - [ ]  滚动到顶部 动画效果
-- [ ]  检查组件内部的方法 - `computed` / `methods` / `watch` / `data`
+- [x]  检查组件内部的方法 - `computed` / `methods` / `watch` / `data`
+- [ ]  手机端事件: `vue-touch` / `hammerjs`

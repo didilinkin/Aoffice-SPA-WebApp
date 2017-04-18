@@ -13,7 +13,7 @@ export default {
     props: {
         titleObj: {
             type: Object,
-            default: () => {
+            default: function() {
                 return {
                     title: '标题',
                     backgroundColor: '#FFF'

@@ -5,6 +5,8 @@ import Vue              from 'vue'
 import MuseUI           from 'muse-ui'
 import 'muse-ui/dist/muse-ui.css'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
+import VueLazyload      from 'vue-lazyload'
+import Layzr            from 'layzr.js'
 
 import App          from './App'
 import store        from './store'
@@ -18,6 +20,16 @@ Vue.config.debug = true
  
 Vue.use( MuseUI )
 Vue.use( VueAwesomeSwiper )
+Vue.use( Layzr )
+Vue.use( VueLazyload )
+
+// or with options
+Vue.use( VueLazyload, {
+    preLoad: 1.3,
+    error: 'dist/error.png',
+    loading: 'dist/loading.gif',
+    attempt: 1
+})
 
 /* eslint-disable no-new */
 new Vue({

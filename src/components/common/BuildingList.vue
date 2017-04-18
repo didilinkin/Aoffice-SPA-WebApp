@@ -2,8 +2,9 @@
 <template lang="pug">
 .buildingList
     .buildingList--itemBox.auto--modulePaddingBottom( v-for="item in buildingListArr" )
+        // v-bind:style="{ backgroundImage: 'url(' + item.appListUrl + ')' }"
         .itemBox--intro(
-            v-bind:style="{ backgroundImage: 'url(' + item.appListUrl + ')' }"
+            v-lazy:background-image='item.appListUrl'
             @click="toBuildingDetails( item.code, item.type )"
         )
             .badge {{ item.badge }}
