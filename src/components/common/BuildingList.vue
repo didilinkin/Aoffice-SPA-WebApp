@@ -2,7 +2,6 @@
 <template lang="pug">
 .buildingList
     .buildingList--itemBox.auto--modulePaddingBottom( v-for="item in buildingListArr" )
-        // v-bind:style="{ backgroundImage: 'url(' + item.appListUrl + ')' }"
         .itemBox--intro(
             v-lazy:background-image='item.appListUrl'
             @click="toBuildingDetails( item.code, item.type )"
@@ -10,7 +9,10 @@
             .badge {{ item.badge }}
             h2 {{ item.name }}
             p {{ item.subTitle }}
-        BuildingDetails( v-bind:buildingDetailsObj="item" )
+        BuildingDetails( 
+            v-bind:buildingDetailsObj="item"
+            v-show="hasDetails"
+        )
 </template>
 
 <script>
@@ -41,6 +43,10 @@ export default {
                     }
                 ]
             }
+        },
+        hasDetails: {
+            type: Boolean,
+            default: true
         }
     },
     methods: {

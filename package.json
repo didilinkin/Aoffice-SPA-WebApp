@@ -17,6 +17,7 @@
     "vue": "^2.2.6",
     "vue-lazyload": "^1.0.3",
     "vue-router": "^2.3.1",
+    "vue-scrollto": "^2.6.6",
     "vuex": "^2.2.1"
   },
   "devDependencies": {

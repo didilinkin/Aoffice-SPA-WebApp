@@ -4,7 +4,10 @@
     // 标题
     TitleModule( v-bind:titleObj="resourceTitle" )    
     // 列表渲染
-    BuildingList( v-bind:buildingListArr="resourceArr" )
+    BuildingList(
+        v-bind:buildingListArr="resourceArr"
+        v-bind:hasDetails="true"
+    )
 </template>
 
 <script>

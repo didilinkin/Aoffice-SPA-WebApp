@@ -51,7 +51,7 @@ npm run build --report
 - [ ]  `hotcss` 替换 手淘方案
 - [ ]  测试`Nuxt` - `SSR`方案
 - [ ]  路由 添加过渡动效
-- [ ]  组件 懒加载
+- [x]  组件 懒加载
 - [ ]  滚动到顶部 动画效果
 - [x]  检查组件内部的方法 - `computed` / `methods` / `watch` / `data`
 - [ ]  手机端事件: `vue-touch` / `hammerjs`

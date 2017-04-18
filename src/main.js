@@ -6,7 +6,8 @@ import MuseUI           from 'muse-ui'
 import 'muse-ui/dist/muse-ui.css'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 import VueLazyload      from 'vue-lazyload'
-import Layzr            from 'layzr.js'
+import layzr            from 'layzr.js'
+import VueScrollTo      from 'vue-scrollto'
 
 import App          from './App'
 import store        from './store'
@@ -17,13 +18,20 @@ require( './assets/iconFont/font-awesome.min.css' )
 Vue.config.productionTip = false
 Vue.config.devtools = true
 Vue.config.debug = true
+
+const lazyLoader = layzr({
+    normal: 'data-normal',
+    retina: 'data-retina',
+    srcset: 'data-srcset',
+    threshold: 35
+})
  
 Vue.use( MuseUI )
 Vue.use( VueAwesomeSwiper )
-Vue.use( Layzr )
+Vue.use( lazyLoader )
 Vue.use( VueLazyload )
+Vue.use( VueScrollTo )
 
-// or with options
 Vue.use( VueLazyload, {
     preLoad: 1.3,
     error: 'dist/error.png',
